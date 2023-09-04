@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f0bf695f4e217914db137e479ff61360
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - replacementObject: {fileID: 2955501902106156188, guid: 70315ffca3798f647b701e73c0ad5f0a, type: 3}
+  - toAddSoyaonPearl: {fileID: 6876015355247569372, guid: ecc94dd667678254c822d6517bd512df, type: 3}
+  - toAddSoyaonPearlwithSyrup: {fileID: 2955501902106156188, guid: 70315ffca3798f647b701e73c0ad5f0a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

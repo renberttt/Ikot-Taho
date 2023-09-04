@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 29d236783a9ed814cb11acfbfb208ca5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - patienceMeterImage: {instanceID: 0}
+  - happyFaceSprite: {instanceID: 0}
+  - boredFaceSprite: {instanceID: 0}
+  - angryFaceSprite: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
