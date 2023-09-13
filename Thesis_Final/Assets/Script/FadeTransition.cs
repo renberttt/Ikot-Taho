@@ -44,6 +44,13 @@ public class FadeTransition : MonoBehaviour
     }
     public void Restart()
     {
+        // Unpause the game if it was paused.
+        if (IsPaused)
+        {
+            TogglePause();
+        }
+
+        // Restart the current scene.
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

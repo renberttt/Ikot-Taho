@@ -21,6 +21,7 @@ TagManager:
   - PearlAndSyrup
   - StackedCups
   - Ingredients
+  - FullSoya
   layers:
   - Default
   - TransparentFX

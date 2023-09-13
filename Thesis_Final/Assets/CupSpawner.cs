@@ -7,7 +7,7 @@ public class CupSpawner : MonoBehaviour
     public GameObject emptyCupPrefab; // Reference to the empty cup prefab in the Inspector.
     private GameObject currentCup;
 
-    private Vector3 fixedSpawnPosition = new Vector3(0, -3.5f, 0f);
+    private Vector3 fixedSpawnPosition = new Vector3(0, -3.2f, 0f);
 
     private void Update()
     {

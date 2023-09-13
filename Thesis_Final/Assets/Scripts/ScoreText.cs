@@ -27,7 +27,7 @@ public class ScoreText : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Income: " + score.ToString();
+            scoreText.text = score.ToString();
         }
     }
 }
