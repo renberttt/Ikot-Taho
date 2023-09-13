@@ -43,7 +43,22 @@ public class PearlScoopSpawner : MonoBehaviour
     {
         if (isDragging)
         {
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(currentScoop.transform.position, currentScoop.GetComponent<BoxCollider2D>().size, 0f);
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.CompareTag("Cup"))
+                {
+                    Destroy(currentScoop);
+                    Cup cup = collider.GetComponent<Cup>();
+                    if (cup != null)
+                    {
+                        cup.AddIngredient("Pearl");
+                    }
+                    break;
+                }
+            }
             Destroy(currentScoop);
+
             canInteractWithScoop = true;
             isDragging = false;
         }

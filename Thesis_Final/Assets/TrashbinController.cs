@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class TrashbinController : MonoBehaviour
 {
-    private bool CheckCollision()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0f);
-        foreach (Collider2D collider in colliders)
+        if (collision.CompareTag("Cup"))
         {
-            if (collider != GetComponent<Collider2D>() && collider.CompareTag("Cup"))
-            {
-                return true; // Collision detected with a Trashbin object
-            }
+            Destroy(collision.gameObject); 
         }
-        return false;
     }
-
 
 }

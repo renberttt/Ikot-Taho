@@ -9,30 +9,27 @@ public class Cup : MonoBehaviour
     private Vector3 offset;
 
     private List<string> ingredients = new List<string>(); // List to track ingredients.
-
-    public void AddIngredient(string ingredient)
+    public void AddIngredient(string ingredientName)
     {
-        // Check if the ingredient is not already in the list.
-        if (!ingredients.Contains(ingredient))
+        if (ingredients.Count < 4)
         {
-            // Add the ingredient to the list.
-            ingredients.Add(ingredient);
-
-            // Display a Debug log showing the placed ingredients.
-            Debug.Log("Placed Ingredient: " + ingredient);
-
-            // Perform any other actions or logic for the ingredient placement.
-            // For example, you can update the cup's appearance or properties based on the ingredients.
+            ingredients.Add(ingredientName);
+            Debug.Log("Ingredients in the cup: ");
+            foreach (string ingredient in ingredients)
+            {
+                Debug.Log(ingredient);
+            }
+        }
+        else
+        {
+            Debug.Log("The cup is already full");
         }
     }
-
     private void Start()
     {
-        // Current Position of the CUP 
         initialPosition = transform.position;
     }
 
-    // The cup would be able to be dragged 
     private void OnMouseDown()
     {
         if (!isDragging)
@@ -48,8 +45,6 @@ public class Cup : MonoBehaviour
         if (isDragging)
         {
             isDragging = false;
-
-            // Checks if the cup collides with the Trashbin and the cup would be removed if released on the trashcan
             Collider2D[] hitColliders = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0f);
             foreach (Collider2D collider in hitColliders)
             {
@@ -59,7 +54,6 @@ public class Cup : MonoBehaviour
                     return;
                 }
             }
-            // The cup would return to the initial position when the cup is released
             transform.position = initialPosition;
         }
     }

@@ -42,7 +42,22 @@ public class SoyaScoopSpawner : MonoBehaviour
     {
         if (isDragging)
         {
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(currentScoop.transform.position, currentScoop.GetComponent<BoxCollider2D>().size, 0f);
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.CompareTag("Cup"))
+                {
+                    Destroy(currentScoop);
+                    Cup cupController = collider.GetComponent<Cup>();
+                    if (cupController != null)
+                    {
+                        cupController.AddIngredient("Soya");
+                    }
+                    break;
+                }
+            }
             Destroy(currentScoop);
+
             canInteractWithScoop = true;
             isDragging = false;
         }
