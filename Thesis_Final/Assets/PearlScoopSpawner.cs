@@ -6,19 +6,36 @@ public class PearlScoopSpawner : MonoBehaviour
 {
     public GameObject pearlScoopPrefab;
     private GameObject currentScoop;
+    private bool canInteractWithScoop = true;
     private bool isDragging = false;
     private Vector3 offset;
 
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource component is missing.");
+        }
+    }
     private void OnMouseDown()
     {
-        if (!isDragging)
+        if (canInteractWithScoop)
         {
             Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPosition.z = 0f;
 
             currentScoop = Instantiate(pearlScoopPrefab, clickPosition, Quaternion.identity);
+            canInteractWithScoop = false;
             offset = currentScoop.transform.position - clickPosition;
             isDragging = true;
+
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
         }
     }
 
@@ -26,26 +43,9 @@ public class PearlScoopSpawner : MonoBehaviour
     {
         if (isDragging)
         {
-            isDragging = false;
-
-            // Check if the Pearl scoop is within the cup's collider.
-            Collider2D cupCollider = GetComponent<Collider2D>();
-
-            if (cupCollider != null && cupCollider.OverlapPoint(currentScoop.transform.position))
-            {
-                Debug.Log("Pearl scoop placed in cup.");
-
-                // Access the Cup script of the cup GameObject.
-                Cup cupScript = GetComponent<Cup>();
-
-                if (cupScript != null)
-                {
-                    // Add "Pearls" to the cup's list of ingredients.
-                    cupScript.AddIngredient("Pearls");
-                }
-            }
-
             Destroy(currentScoop);
+            canInteractWithScoop = true;
+            isDragging = false;
         }
     }
 

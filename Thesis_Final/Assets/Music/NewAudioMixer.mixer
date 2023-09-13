@@ -1,5 +1,47 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-7924967746918362589
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 82a3570ce72d16748be6ce22c8289b6c
+  m_EffectName: SFX Reverb
+  m_MixLevel: 8d1786ae1514a9e44847f3db9f9a7e43
+  m_Parameters:
+  - m_ParameterName: Dry Level
+    m_GUID: e410680ca5a3c6b4598f5f85fe4564c2
+  - m_ParameterName: Room
+    m_GUID: fb15f9f3583db9342a52e6f294dc8e86
+  - m_ParameterName: Room HF
+    m_GUID: 56980f09b5a84224bb7e15353ddf47d5
+  - m_ParameterName: Decay Time
+    m_GUID: 9bff3964ec9ae794387cbf653f3afda4
+  - m_ParameterName: Decay HF Ratio
+    m_GUID: 6d238d68672b7fd4283a72e84a9b55d4
+  - m_ParameterName: Reflections
+    m_GUID: 80c8dc6745f6b6a4dae9919ffa7db6e1
+  - m_ParameterName: Reflect Delay
+    m_GUID: 2c189ade9960f6e41bae2d142e5a953f
+  - m_ParameterName: Reverb
+    m_GUID: a50537ab1f6ebdb4892b051869c7d578
+  - m_ParameterName: Reverb Delay
+    m_GUID: 596a87d3aada80446a5c84304a3e2514
+  - m_ParameterName: Diffusion
+    m_GUID: 5f77666bd116f66468831f4e42029aca
+  - m_ParameterName: Density
+    m_GUID: 2fa8e6b3ae774ba46904c7716fd7047f
+  - m_ParameterName: HF Reference
+    m_GUID: baaa3090893434547bd307bf9b5f5ca0
+  - m_ParameterName: Room LF
+    m_GUID: 7c61a5557e31f8c4495d82e38eb8d8d8
+  - m_ParameterName: LF Reference
+    m_GUID: 61c5f18b2e60e5d439c70006c5ec3e3f
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-4281313575013913087
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -50,6 +92,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 9083205315757193103}
+  - {fileID: -7924967746918362589}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -131,9 +174,10 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 590c04036293b93499efa6dc5b0a7b9a
   m_FloatValues:
+    fb15f9f3583db9342a52e6f294dc8e86: -10000
     20fa6c6ac05907d45933e8cc593c47e0: 0
-    7bfe77ea1f85086428c31ef8eb297e59: -0.16685188
-    ea3664faa66da47489b549b2326e2c50: -0.08374829
+    7bfe77ea1f85086428c31ef8eb297e59: 0.6
+    ea3664faa66da47489b549b2326e2c50: 0.01019318
   m_TransitionOverrides: {}
 --- !u!243 &2500901919260227354
 AudioMixerGroupController:

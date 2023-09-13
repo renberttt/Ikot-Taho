@@ -393,6 +393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9143797682379400898}
+  - component: {fileID: -154366573450491259}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -418,3 +419,25 @@ Transform:
   - {fileID: 9143797681459445446}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-154366573450491259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9143797682379401020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d706910b1441eb34d8cc6dff3d129c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 0}
+  SFXSource: {fileID: 0}
+  background: {fileID: 8300000, guid: 7dd6a1c27e9544c478b346824ff112f8, type: 3}
+  backgroundGame: {fileID: 8300000, guid: 7efc369001fea6e408ff59ca7f65c806, type: 3}
+  buttonSelect: {fileID: 8300000, guid: 9802f6359df621940862c47864e4f9f5, type: 3}
+  winSound: {fileID: 8300000, guid: 16ecc21ab7ff9d34694e3e2591d8a002, type: 3}
+  syrupScoop: {fileID: 8300000, guid: 71d97bb956d5c9549a02d1348b7b04dc, type: 3}
+  sagoScoop: {fileID: 8300000, guid: 71d97bb956d5c9549a02d1348b7b04dc, type: 3}
+  tahoScoop: {fileID: 8300000, guid: 7773104ab9bc31a4a86a640285230935, type: 3}
+  gameOver: {fileID: 8300000, guid: d7c6f29455702f9418aa300cb38240bf, type: 3}

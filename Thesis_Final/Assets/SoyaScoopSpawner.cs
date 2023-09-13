@@ -10,6 +10,15 @@ public class SoyaScoopSpawner : MonoBehaviour
     private bool isDragging = false;
     private Vector3 offset;
 
+    private AudioSource audioSource;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource component is missing.");
+        }
+    }
     private void OnMouseDown()
     {
         if (canInteractWithScoop)
@@ -21,6 +30,11 @@ public class SoyaScoopSpawner : MonoBehaviour
             canInteractWithScoop = false;
             offset = currentScoop.transform.position - clickPosition;
             isDragging = true;
+
+            if(audioSource != null)
+            {
+                audioSource.Play();
+            }
         }
     }
 

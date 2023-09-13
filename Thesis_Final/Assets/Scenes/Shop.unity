@@ -921,6 +921,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -154366573450491259, guid: 99146ab8aac472540b078073aeec1569, type: 3}
+      propertyPath: SFXSource
+      value: 
+      objectReference: {fileID: 1737832288}
+    - target: {fileID: -154366573450491259, guid: 99146ab8aac472540b078073aeec1569, type: 3}
+      propertyPath: musicSource
+      value: 
+      objectReference: {fileID: 1737832289}
     - target: {fileID: 9143797682379400898, guid: 99146ab8aac472540b078073aeec1569, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -976,7 +984,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 99146ab8aac472540b078073aeec1569, type: 3}
 --- !u!114 &1737832287 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9143797682379400899, guid: 99146ab8aac472540b078073aeec1569, type: 3}
+  m_CorrespondingSourceObject: {fileID: -154366573450491259, guid: 99146ab8aac472540b078073aeec1569, type: 3}
   m_PrefabInstance: {fileID: 1737832286}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -985,6 +993,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d706910b1441eb34d8cc6dff3d129c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1737832288 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9143797681459445447, guid: 99146ab8aac472540b078073aeec1569, type: 3}
+  m_PrefabInstance: {fileID: 1737832286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1737832289 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9143797682234163503, guid: 99146ab8aac472540b078073aeec1569, type: 3}
+  m_PrefabInstance: {fileID: 1737832286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2130080146
 GameObject:
   m_ObjectHideFlags: 0

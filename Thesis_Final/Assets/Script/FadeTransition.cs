@@ -13,6 +13,11 @@ public class FadeTransition : MonoBehaviour
 
     public void LoadNextLevel(int sceneIndex)
     {
+        if (IsPaused)
+        {
+            Resume();
+        }
+
         StartCoroutine(LoadLevel(sceneIndex));
     }
     IEnumerator LoadLevel(int sceneIndex){

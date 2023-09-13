@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Clip")]
     public AudioClip background;
+    public AudioClip backgroundGame;
     public AudioClip buttonSelect;
     public AudioClip winSound;
     public AudioClip syrupScoop;
@@ -19,26 +21,41 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
-    public void Awake()
-    {
-        if (instance == null) {
-        instance = this;
-        DontDestroyOnLoad(gameObject);
- 
-    } else if (instance != this) {
-        Destroy(instance.gameObject);
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-        
-    }
+    private Dictionary<string, AudioClip> sceneBackgroundMusic = new Dictionary<string, AudioClip>();
 
-    public void Start()
+    private void Awake()
     {
-        musicSource.clip = background;
-        musicSource.Play();
-    }
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(instance.gameObject);
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
+        sceneBackgroundMusic["Main Menu"] = background;
+        sceneBackgroundMusic["Stage Selection"] = background;
+        sceneBackgroundMusic["Difficulty Selection"] = background;
+        sceneBackgroundMusic["Shop"] = background;
+        sceneBackgroundMusic["CSCS_GAME"] = backgroundGame;
+
+        int sceneCount = SceneManager.sceneCount;
+        for (int i = 0; i < sceneCount; i++)
+        {
+            string sceneName = SceneManager.GetSceneAt(i).name;
+
+            if (sceneBackgroundMusic.ContainsKey(sceneName))
+            {
+                musicSource.clip = sceneBackgroundMusic[sceneName];
+                musicSource.Play();
+                break;
+            }
+        }
+    }
     public void PlaySFX(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);

@@ -6,8 +6,13 @@ public class CupSpawner : MonoBehaviour
 {
     public GameObject emptyCupPrefab; // Reference to the empty cup prefab in the Inspector.
     private GameObject currentCup;
-
+    private AudioSource audioSource;
     private Vector3 fixedSpawnPosition = new Vector3(0, -3.2f, 0f);
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -25,6 +30,10 @@ public class CupSpawner : MonoBehaviour
                     if (currentCup != null)
                     {
                         Destroy(currentCup);
+                    }
+                    if (audioSource != null)
+                    {
+                        audioSource.Play();
                     }
                     currentCup = Instantiate(emptyCupPrefab, fixedSpawnPosition, Quaternion.identity);
                     break; // Exit the loop after creating one cup.
