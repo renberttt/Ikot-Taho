@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8252809165570817494}
   - component: {fileID: 255654701891270372}
-  - component: {fileID: 565535779323716587}
   - component: {fileID: 5674131329057025656}
+  - component: {fileID: 8788464386449651918}
   m_Layer: 0
   m_Name: emptycup
   m_TagString: Cup
@@ -86,8 +86,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &565535779323716587
-BoxCollider2D:
+--- !u!114 &5674131329057025656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706185503692916168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f5a9d725e5bb44f84ba7aeeb0ff401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cupRenderer: {fileID: 255654701891270372}
+  firstLayerSprites:
+  - {fileID: 21300000, guid: b6faab9d0e1160c4bbe47ebc62bf5953, type: 3}
+  - {fileID: 21300000, guid: 7545f235a9477394e8086844144df6b0, type: 3}
+  - {fileID: 21300000, guid: 1b7960f51ae865c45ad3eae7dc47314b, type: 3}
+  secondLayerSprites:
+  - {fileID: 21300000, guid: 38c0bedc76861f44b9b0bc8c437d7e65, type: 3}
+  - {fileID: 21300000, guid: 45f02b5be95c11b46b1cc5810642dd53, type: 3}
+  - {fileID: 21300000, guid: b6ad9bbc102bd0848b2a8f21d1a62646, type: 3}
+  - {fileID: 21300000, guid: 743235d4db94be34281e946ea199e7dd, type: 3}
+  - {fileID: 21300000, guid: 5a5be50bbba7f9e4db0cee279bf1f809, type: 3}
+  - {fileID: 21300000, guid: 3565d05dae068c545bb4e6e757df2b65, type: 3}
+  thirdLayerSprites:
+  - {fileID: 21300000, guid: ccee853787c7f484fb58c0ade1c7dad0, type: 3}
+  - {fileID: 21300000, guid: 4b2c5a53c936abc45a69afaa48ed017d, type: 3}
+  - {fileID: 21300000, guid: 12d17cd69e8db4c4a904ba0f238e303e, type: 3}
+  - {fileID: 21300000, guid: 0a2f5635703c05d45ae56959e1e6f866, type: 3}
+  - {fileID: 21300000, guid: 78c7dc7b9407350438799ff24dbcf671, type: 3}
+  - {fileID: 21300000, guid: f5ff4ba1e9902814b93dc71f02677d7a, type: 3}
+  - {fileID: 21300000, guid: df22ba3312b897c4c9514afd19518247, type: 3}
+  - {fileID: 21300000, guid: e31704b132bbcb640b1c1530bac560ab, type: 3}
+  - {fileID: 21300000, guid: d5ea92aa0d83a0c4ba5b237ee3464f59, type: 3}
+  - {fileID: 21300000, guid: 1db87ae428227ca4dad81fdb333243bb, type: 3}
+--- !u!60 &8788464386449651918
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -115,7 +150,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -128,18 +163,28 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.12, y: 6.08}
-  m_EdgeRadius: 0
---- !u!114 &5674131329057025656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1706185503692916168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83f5a9d725e5bb44f84ba7aeeb0ff401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Points:
+    m_Paths:
+    - - {x: 2.56, y: 2.22}
+      - {x: 2.56, y: 2.49}
+      - {x: 1.79, y: 2.96}
+      - {x: 1.49, y: 3.04}
+      - {x: -1.52, y: 3.04}
+      - {x: -2.44, y: 2.58}
+      - {x: -2.56, y: 2.4299998}
+      - {x: -2.56, y: 2.21}
+      - {x: -2.4299998, y: 2.03}
+      - {x: -2.09, y: 0.12}
+      - {x: -1.9399999, y: -0.79999995}
+      - {x: -1.92, y: -0.82}
+      - {x: -1.78, y: -1.5999999}
+      - {x: -1.76, y: -1.62}
+      - {x: -1.62, y: -2.24}
+      - {x: -1.5999999, y: -2.26}
+      - {x: -1.4599999, y: -2.8799999}
+      - {x: -1.3, y: -3.04}
+      - {x: 1.3, y: -3.04}
+      - {x: 1.4599999, y: -2.8899999}
+      - {x: 1.8, y: -1.61}
+      - {x: 2.47, y: 2.18}
+  m_UseDelaunayMesh: 0

@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 public class TimerUI : MonoBehaviour
 {
-    public float duration = 300f; // Total duration of the timer in seconds (5 minutes)
-    private float remainingTime; // Time remaining in seconds
-    private Text timerText; // Reference to the UI Text component
+    public float duration = 300f; 
+    private float remainingTime; 
+    private Text timerText;
 
-    private bool isTimerRunning = true; // Flag indicating if the timer is running
+    private bool isTimerRunning = true;
 
-    public GameObject loseGameObject; // Reference to the game object to spawn when the player loses
-    public GameObject winObjectPrefab; // Reference to the game object prefab to spawn when the player wins
+    public GameObject loseGameObject;
+    public GameObject winObjectPrefab;
 
     private void Start()
     {
