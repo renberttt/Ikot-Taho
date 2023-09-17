@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8662639398910323246}
   - component: {fileID: 5999680559683507115}
   m_Layer: 0
-  m_Name: CSCS Customer
+  m_Name: CSCS
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
