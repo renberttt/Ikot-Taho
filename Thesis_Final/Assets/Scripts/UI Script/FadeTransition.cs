@@ -45,7 +45,7 @@ public class FadeTransition : MonoBehaviour
         // Trigger pause or resume functionality in other scripts
         Time.timeScale = IsPaused ? 0f : 1f;
         CustomerSpawner.TogglePause(IsPaused);
-        CustomerMovement.TogglePause(IsPaused);
+        //CustomerMovement.TogglePause(IsPaused);
     }
     public void Restart()
     {

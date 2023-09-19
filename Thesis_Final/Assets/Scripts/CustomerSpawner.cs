@@ -6,7 +6,8 @@ public class CustomerSpawner : MonoBehaviour
 {
     public GameObject[] customerPrefabs;
     public Sprite[] customerSprites;
-    public float spawnInterval = 3f; // Interval in seconds between customer spawns
+    public float spawnInterval = 10f; // Interval in seconds between customer spawns // Maximum number of customers allowed
+    public Transform customerContainer; // Reference to the "Customer" GameObject as the parent/container
 
     private List<GameObject> spawnedCustomers = new List<GameObject>(); // List to store spawned customers
     private float spawnTimer = 0f; // Timer to track the spawn interval
@@ -39,7 +40,6 @@ public class CustomerSpawner : MonoBehaviour
 
         GameObject newCustomer = Instantiate(customerPrefab, spawnPosition, Quaternion.identity);
         GameObject customer = GameObject.Find("Customer");
-
         Sprite selectedSprite = customerSprites[Random.Range(0, customerSprites.Length)];
         SpriteRenderer customerRenderer = newCustomer.GetComponent<SpriteRenderer>();
 
@@ -48,7 +48,8 @@ public class CustomerSpawner : MonoBehaviour
             customerRenderer.sprite = selectedSprite;
         }
 
-        newCustomer.transform.SetParent(customer.transform, false);
+        // Set the "Customer" GameObject as the parent/container
+        newCustomer.transform.SetParent(customer.transform,false);
         spawnedCustomers.Add(newCustomer);
     }
 
