@@ -5,19 +5,22 @@ public class CustomerMovement : MonoBehaviour
 {
     public float[] targetXPositions = { 6.75f, 2.25f, -2.25f, -6.75f };
     public float movementSpeed = 2f;
-    public float customerSpacingDelay = 1f; // Delay between customers
+    public float customerSpacingDelay = 1f;
 
     private int currentTargetIndex;
     private bool isMoving = true;
-    private float spacingTimer; // Timer to control customer spacing
+    private float spacingTimer;
 
     // Track occupied positions
     private static List<float> occupiedPositions = new List<float>();
+
+    private Vector3 spawnPosition;
 
     private void Start()
     {
         SetInitialTargetPosition();
         spacingTimer = customerSpacingDelay;
+        spawnPosition = transform.position;
     }
 
     void Update()
@@ -26,13 +29,10 @@ public class CustomerMovement : MonoBehaviour
         {
             float targetX = targetXPositions[currentTargetIndex];
             float direction = Mathf.Sign(targetX - transform.position.x);
-
-            // Check if the next position is occupied by another customer
             bool nextPositionOccupied = IsNextPositionOccupied(direction);
 
             if (!nextPositionOccupied)
             {
-                // Check the spacing timer
                 if (spacingTimer <= 0f)
                 {
                     float newPositionX = transform.position.x + direction * movementSpeed * Time.deltaTime;
@@ -43,6 +43,8 @@ public class CustomerMovement : MonoBehaviour
                         occupiedPositions.Add(targetX);
                         spacingTimer = customerSpacingDelay;
                         SetNextTargetPosition();
+
+                        StartCoroutine(WaitAndMoveBack());
                     }
                     else
                     {
@@ -57,17 +59,14 @@ public class CustomerMovement : MonoBehaviour
         }
     }
 
-    // Check if the next position is occupied by another customer
     private bool IsNextPositionOccupied(float direction)
     {
         int nextTargetIndex = (currentTargetIndex + 1) % targetXPositions.Length;
         float nextTargetX = targetXPositions[nextTargetIndex];
 
-        // Check if the next position is in the list of occupied positions
         return occupiedPositions.Contains(nextTargetX);
     }
 
-    // Set the initial target position to an available slot
     private void SetInitialTargetPosition()
     {
         for (int i = 0; i < targetXPositions.Length; i++)
@@ -79,8 +78,6 @@ public class CustomerMovement : MonoBehaviour
             }
         }
     }
-
-    // Set the next available target position
     private void SetNextTargetPosition()
     {
         int nextTargetIndex = (currentTargetIndex + 1) % targetXPositions.Length;
@@ -95,6 +92,31 @@ public class CustomerMovement : MonoBehaviour
         currentTargetIndex = nextTargetIndex;
     }
 
+    private System.Collections.IEnumerator WaitAndMoveBack()
+    {
+        yield return new WaitForSeconds(5f);
+
+        Vector3 originalPosition = transform.position;
+        Vector3 targetPosition = spawnPosition;
+
+        float journeyLength = Vector3.Distance(transform.position, targetPosition);
+        float startTime = Time.time;
+
+        while (true)
+        {
+            float distanceCovered = (Time.time - startTime) * movementSpeed;
+            float fractionOfJourney = distanceCovered / journeyLength;
+            transform.position = Vector3.Lerp(originalPosition, targetPosition, fractionOfJourney);
+
+            if (fractionOfJourney >= 1f)
+            {
+                Destroy(gameObject);
+                break;
+            }
+
+            yield return null;
+        }
+    }
     public void StopMoving()
     {
         isMoving = false;
