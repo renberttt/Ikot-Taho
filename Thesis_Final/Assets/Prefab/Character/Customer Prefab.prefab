@@ -102,8 +102,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b003071a31f18c54a9a997e6b335fac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetXPosition: -6.75
-  movementSpeed: 2
+  targetXPositions:
+  - 6.75
+  - 2.25
+  - -2.25
+  - -6.75
+  movementSpeed: 5
+  customerSpacingDelay: 1
+  orderPrefab: {fileID: 0}
 --- !u!61 &-6212836404180039678
 BoxCollider2D:
   m_ObjectHideFlags: 0

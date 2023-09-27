@@ -6,6 +6,9 @@ public class CustomerMovement : MonoBehaviour
     public float[] targetXPositions = { 6.75f, 2.25f, -2.25f, -6.75f };
     public float movementSpeed = 2f;
     public float customerSpacingDelay = 1f;
+    public float queueTime = 5f;
+ 
+    public GameObject orderPrefab;
 
     private int currentTargetIndex;
     private bool isMoving = true;
@@ -94,7 +97,7 @@ public class CustomerMovement : MonoBehaviour
 
     private System.Collections.IEnumerator WaitAndMoveBack()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(queueTime);
 
         Vector3 originalPosition = transform.position;
         Vector3 targetPosition = spawnPosition;
