@@ -955,6 +955,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1306086353}
+        m_TargetAssemblyTypeName: ButtonImageDisplay, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 593600924}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &593600925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1542,8 +1554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayImage: {fileID: 164671020}
   images:
-  - {fileID: 21300000, guid: 097818c0e4eb0484885d45193a3db359, type: 3}
   - {fileID: 21300000, guid: 82f220536ec83ad4b866c802301f9b0f, type: 3}
+  - {fileID: 21300000, guid: 097818c0e4eb0484885d45193a3db359, type: 3}
   - {fileID: 21300000, guid: e7808271897b81747b5e2e8b6286d06c, type: 3}
 --- !u!1001 &1444276016
 PrefabInstance:
@@ -1559,7 +1571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8355785871717761809, guid: 2b7ade73e0ad4504389179f75e8f78eb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8355785871717761814, guid: 2b7ade73e0ad4504389179f75e8f78eb, type: 3}
       propertyPath: m_RootOrder
@@ -1755,6 +1767,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1306086353}
+        m_TargetAssemblyTypeName: ButtonImageDisplay, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1475341908}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1475341909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1918,6 +1942,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1306086353}
+        m_TargetAssemblyTypeName: ButtonImageDisplay, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1685456104}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Stage Selection.unity
     guid: a403ce3091c8c41499b2cff319e4d8ce
   - enabled: 1
-    path: Assets/Scenes/CSCS_GAME.unity
+    path: Assets/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
