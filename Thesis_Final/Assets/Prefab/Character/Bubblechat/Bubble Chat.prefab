@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2039284787689103129}
   - component: {fileID: 6932466099193022420}
   m_Layer: 0
-  m_Name: bbb
+  m_Name: Bubble Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -6,10 +6,10 @@ public class CustomerSpawner : MonoBehaviour
 {
     public GameObject[] customerPrefabs;
     public Sprite[] customerSprites;
-    public float spawnInterval = 10f; // Interval in seconds between customer spawns // Maximum number of customers allowed
-    public Transform customerContainer; // Reference to the "Customer" GameObject as the parent/container
+    public float spawnInterval = 10f;
+    public Transform customerContainer;
 
-    private List<GameObject> spawnedCustomers = new List<GameObject>(); // List to store spawned customers
+    private Queue<GameObject> customerQueue = new Queue<GameObject>();
     private float spawnTimer = 0f; // Timer to track the spawn interval
 
     private static bool isSpawningPaused;
@@ -50,9 +50,20 @@ public class CustomerSpawner : MonoBehaviour
 
         // Set the "Customer" GameObject as the parent/container
         newCustomer.transform.SetParent(customer.transform,false);
-        spawnedCustomers.Add(newCustomer);
+        customerQueue.Enqueue(newCustomer);
     }
+    public void ServeCustomer()
+    {
+        if (customerQueue.Count > 0)
+        {
+            GameObject customerToServe = customerQueue.Dequeue(); // Dequeue the next customer.
 
+            // Perform serving actions on customerToServe.
+
+            // Destroy the customer or move them elsewhere when done serving.
+            Destroy(customerToServe);
+        }
+    }
     // Method to toggle customer spawning pause
     public static void TogglePause(bool pause)
     {

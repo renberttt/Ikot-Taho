@@ -5,14 +5,11 @@ public class CustomerMovement : MonoBehaviour
 {
     public float[] targetXPositions = { 6.75f, 2.25f, -2.25f, -6.75f };
     public float movementSpeed = 2f;
-    public float customerSpacingDelay = 1f;
     public float queueTime = 5f;
- 
-    public GameObject orderPrefab;
-
+    public CustomerOrder orderSpawner;
+    public Cup cup;
     private int currentTargetIndex;
     private bool isMoving = true;
-    private float spacingTimer;
 
     // Track occupied positions
     private static List<float> occupiedPositions = new List<float>();
@@ -22,8 +19,8 @@ public class CustomerMovement : MonoBehaviour
     private void Start()
     {
         SetInitialTargetPosition();
-        spacingTimer = customerSpacingDelay;
         spawnPosition = transform.position;
+        orderSpawner.SetQueueTime(queueTime);
     }
 
     void Update()
@@ -32,37 +29,30 @@ public class CustomerMovement : MonoBehaviour
         {
             float targetX = targetXPositions[currentTargetIndex];
             float direction = Mathf.Sign(targetX - transform.position.x);
-            bool nextPositionOccupied = IsNextPositionOccupied(direction);
+            bool nextPositionOccupied = IsNextPositionOccupied();
 
             if (!nextPositionOccupied)
             {
-                if (spacingTimer <= 0f)
+                float newPositionX = transform.position.x + direction * movementSpeed * Time.deltaTime;
+                if ((direction > 0f && newPositionX >= targetX) || (direction < 0f && newPositionX <= targetX))
                 {
-                    float newPositionX = transform.position.x + direction * movementSpeed * Time.deltaTime;
-                    if ((direction > 0f && newPositionX >= targetX) || (direction < 0f && newPositionX <= targetX))
-                    {
-                        transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
-                        isMoving = false;
-                        occupiedPositions.Add(targetX);
-                        spacingTimer = customerSpacingDelay;
-                        SetNextTargetPosition();
+                    transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
+                    isMoving = false;
+                    orderSpawner.SpawnOrderAboveCustomer(transform.position, 0.5f);
+                    SetNextTargetPosition();
+                    StartCoroutine(WaitAndMoveBack(targetX));
+                    occupiedPositions.Add(targetX);
 
-                        StartCoroutine(WaitAndMoveBack());
-                    }
-                    else
-                    {
-                        transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
-                    }
                 }
                 else
                 {
-                    spacingTimer -= Time.deltaTime;
+                    transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
                 }
             }
         }
     }
 
-    private bool IsNextPositionOccupied(float direction)
+    private bool IsNextPositionOccupied()
     {
         int nextTargetIndex = (currentTargetIndex + 1) % targetXPositions.Length;
         float nextTargetX = targetXPositions[nextTargetIndex];
@@ -95,10 +85,9 @@ public class CustomerMovement : MonoBehaviour
         currentTargetIndex = nextTargetIndex;
     }
 
-    private System.Collections.IEnumerator WaitAndMoveBack()
+    public System.Collections.IEnumerator WaitAndMoveBack(float targetX)
     {
         yield return new WaitForSeconds(queueTime);
-
         Vector3 originalPosition = transform.position;
         Vector3 targetPosition = spawnPosition;
 
@@ -114,10 +103,19 @@ public class CustomerMovement : MonoBehaviour
             if (fractionOfJourney >= 1f)
             {
                 Destroy(gameObject);
+                occupiedPositions.Remove(targetX);
                 break;
             }
 
             yield return null;
+        }
+    }
+
+    public void ServeCustomer()
+    {
+        if (GetComponent<Collider2D>().IsTouching(cup.GetComponent<Collider2D>()))
+        {
+            orderSpawner.GiveToCustomer();
         }
     }
     public void StopMoving()

@@ -18,6 +18,7 @@ public class Cup : MonoBehaviour
     private List<string> secondLayerIngredients = new List<string>();
     private List<string> thirdLayerIngredients = new List<string>();
 
+    public CustomerMovement customerMovement;
     private void Start()
     {
         initialPosition = transform.position;
@@ -191,6 +192,7 @@ public class Cup : MonoBehaviour
         {
             isDragging = false;
             Collider2D[] hitColliders = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0f);
+
             foreach (Collider2D collider in hitColliders)
             {
                 if (collider.CompareTag("Trashbin"))
@@ -198,10 +200,24 @@ public class Cup : MonoBehaviour
                     Destroy(gameObject);
                     return;
                 }
+
+                if (collider.CompareTag("Customer"))
+                {
+                    CustomerMovement customer = collider.GetComponent<CustomerMovement>();
+
+                    // Check if it's a customer and serve them.
+                    if (customer != null)
+                    {
+                        // Serve the customer here.
+                        customer.ServeCustomer();
+                    }
+                }
             }
+
             transform.position = initialPosition;
         }
     }
+
 
     private void OnMouseDrag()
     {
