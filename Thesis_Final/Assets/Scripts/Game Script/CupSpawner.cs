@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CupSpawner : MonoBehaviour
 {
+    public CustomerOrder customerOrder;
     public GameObject emptyCupPrefab; // Reference to the empty cup prefab in the Inspector.
     private GameObject currentCup;
     private AudioSource audioSource;
@@ -36,6 +37,11 @@ public class CupSpawner : MonoBehaviour
                         audioSource.Play();
                     }
                     currentCup = Instantiate(emptyCupPrefab, fixedSpawnPosition, Quaternion.identity);
+                    Cup cup = currentCup.GetComponent<Cup>();
+                    if (cup != null)
+                    {
+                        cup.customerOrder = customerOrder;
+                    }
                     break; // Exit the loop after creating one cup.
                 }
             }

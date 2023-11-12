@@ -1,17 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class CustomerMovement : MonoBehaviour
 {
+    public CustomerOrder orderSpawner;
+    private Cup cup;
+    public Text healthText;
+
     public float[] targetXPositions = { 6.75f, 2.25f, -2.25f, -6.75f };
     public float movementSpeed = 2f;
     public float queueTime = 5f;
-    public CustomerOrder orderSpawner;
-    public Cup cup;
-    private int currentTargetIndex;
-    private bool isMoving = true;
 
-    // Track occupied positions
+
+    private int currentTargetIndex;
+    public bool isMoving = true;
+
     private static List<float> occupiedPositions = new List<float>();
 
     private Vector3 spawnPosition;
@@ -29,7 +33,7 @@ public class CustomerMovement : MonoBehaviour
         {
             float targetX = targetXPositions[currentTargetIndex];
             float direction = Mathf.Sign(targetX - transform.position.x);
-            bool nextPositionOccupied = IsNextPositionOccupied();
+            bool nextPositionOccupied = IsNextPositionOccupied(targetX);
 
             if (!nextPositionOccupied)
             {
@@ -39,10 +43,8 @@ public class CustomerMovement : MonoBehaviour
                     transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
                     isMoving = false;
                     orderSpawner.SpawnOrderAboveCustomer(transform.position, 0.5f);
-                    SetNextTargetPosition();
-                    StartCoroutine(WaitAndMoveBack(targetX));
-                    occupiedPositions.Add(targetX);
-
+                    AddOccupiedPosition(targetX);
+                    Debug.Log("Occupied Positions: " + string.Join(", ", occupiedPositions));
                 }
                 else
                 {
@@ -51,13 +53,14 @@ public class CustomerMovement : MonoBehaviour
             }
         }
     }
-
-    private bool IsNextPositionOccupied()
+    private bool IsNextPositionOccupied(float targetX)
     {
-        int nextTargetIndex = (currentTargetIndex + 1) % targetXPositions.Length;
-        float nextTargetX = targetXPositions[nextTargetIndex];
+        return occupiedPositions.Contains(targetX);
+    }
 
-        return occupiedPositions.Contains(nextTargetX);
+    private void AddOccupiedPosition(float targetX)
+    {
+        occupiedPositions.Add(targetX);
     }
 
     private void SetInitialTargetPosition()
@@ -71,22 +74,17 @@ public class CustomerMovement : MonoBehaviour
             }
         }
     }
-    private void SetNextTargetPosition()
+
+    public void ReceiveOrder(float currentXPosition)
     {
-        int nextTargetIndex = (currentTargetIndex + 1) % targetXPositions.Length;
-        float nextTargetX = targetXPositions[nextTargetIndex];
-
-        while (occupiedPositions.Contains(nextTargetX))
-        {
-            nextTargetIndex = (nextTargetIndex + 1) % targetXPositions.Length;
-            nextTargetX = targetXPositions[nextTargetIndex];
-        }
-
-        currentTargetIndex = nextTargetIndex;
+        Debug.Log("RECEIVED");
+        Destroy(gameObject);
+        occupiedPositions.Remove(currentXPosition);
     }
 
-    public System.Collections.IEnumerator WaitAndMoveBack(float targetX)
+    private System.Collections.IEnumerator WaitAndMoveBack(float targetX)
     {
+
         yield return new WaitForSeconds(queueTime);
         Vector3 originalPosition = transform.position;
         Vector3 targetPosition = spawnPosition;
@@ -104,6 +102,8 @@ public class CustomerMovement : MonoBehaviour
             {
                 Destroy(gameObject);
                 occupiedPositions.Remove(targetX);
+                Debug.LogWarning("Occupied Positions: " + string.Join(", ", occupiedPositions));
+                DecrementHealthBar();
                 break;
             }
 
@@ -111,13 +111,26 @@ public class CustomerMovement : MonoBehaviour
         }
     }
 
-    public void ServeCustomer()
+    private void DecrementHealthBar()
     {
-        if (GetComponent<Collider2D>().IsTouching(cup.GetComponent<Collider2D>()))
+        if (healthText != null)
         {
-            orderSpawner.GiveToCustomer();
+            int currentHealth = int.Parse(healthText.text);
+
+            // bawas buhay
+            currentHealth--;
+
+            Debug.Log("-1 HP");
+
+
+            healthText.text = currentHealth.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("No Text component found for the health bar.");
         }
     }
+
     public void StopMoving()
     {
         isMoving = false;

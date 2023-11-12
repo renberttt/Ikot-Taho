@@ -589,8 +589,8 @@ MonoBehaviour:
   customerSprites:
   - {fileID: 21300000, guid: 839ca12a8adde3c4881f2dbc437a273e, type: 3}
   - {fileID: 21300000, guid: ab7d6bee5e2b4144784e673db9275a05, type: 3}
-  spawnInterval: 10
-  customerContainer: {fileID: 0}
+  spawnInterval: 5
+  customerContainer: {fileID: 764501124}
 --- !u!1001 &964783206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1462,7 +1462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8355785871717761809, guid: 2b7ade73e0ad4504389179f75e8f78eb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8355785871717761814, guid: 2b7ade73e0ad4504389179f75e8f78eb, type: 3}
       propertyPath: m_RootOrder
@@ -1929,6 +1929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317d0371276f0fa438e2cf317c45f256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customerOrder: {fileID: 0}
   emptyCupPrefab: {fileID: 1706185503692916168, guid: 6dac59de9af14d64d87e128a8f112da3, type: 3}
 --- !u!114 &1351096871492687649
 MonoBehaviour:

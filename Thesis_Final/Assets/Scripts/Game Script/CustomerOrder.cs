@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class CustomerOrder : MonoBehaviour
 {
+    public CustomerMovement customerMovement;
     public GameObject orderPrefab;
-    private GameObject spawnedOrder;
+    public GameObject spawnedOrder;
     private float queueTime;
+
     public void SetQueueTime(float time)
     {
         queueTime = time;
@@ -14,7 +16,6 @@ public class CustomerOrder : MonoBehaviour
         StartCoroutine(SpawnOrderWithDelay(customerPosition, spawnDelay));
         StartCoroutine(RemoveOrderAfterTime(queueTime));
     }
-
     public void GiveToCustomer()
     {
         if (spawnedOrder != null)
@@ -22,7 +23,6 @@ public class CustomerOrder : MonoBehaviour
             Destroy(spawnedOrder);
         }
     }
-
     private System.Collections.IEnumerator SpawnOrderWithDelay(Vector3 customerPosition, float spawnDelay)
     {
         yield return new WaitForSeconds(spawnDelay);

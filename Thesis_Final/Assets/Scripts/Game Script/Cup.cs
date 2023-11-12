@@ -18,7 +18,10 @@ public class Cup : MonoBehaviour
     private List<string> secondLayerIngredients = new List<string>();
     private List<string> thirdLayerIngredients = new List<string>();
 
-    public CustomerMovement customerMovement;
+    private CustomerMovement customerMovement;
+    public CustomerOrder customerOrder;
+    private MainGameController mainGameController;
+
     private void Start()
     {
         initialPosition = transform.position;
@@ -175,7 +178,6 @@ public class Cup : MonoBehaviour
         return null;
     }
 
-
     private void OnMouseDown()
     {
         if (!isDragging)
@@ -198,26 +200,37 @@ public class Cup : MonoBehaviour
                 if (collider.CompareTag("Trashbin"))
                 {
                     Destroy(gameObject);
+                    if (customerOrder != null)
+                    {
+                        customerOrder.GiveToCustomer();
+                    }
                     return;
                 }
 
                 if (collider.CompareTag("Customer"))
                 {
                     CustomerMovement customer = collider.GetComponent<CustomerMovement>();
-
-                    // Check if it's a customer and serve them.
-                    if (customer != null)
+                    if (customer != null && customer.isMoving == false)
                     {
-                        // Serve the customer here.
-                        customer.ServeCustomer();
+                        Destroy(gameObject);
+                        CustomerOrder customerOrder = customer.GetComponent<CustomerOrder>();
+                        if (customerOrder != null)
+                        {
+                            customerOrder.GiveToCustomer();
+                            customer.ReceiveOrder(transform.position.x);
+
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        transform.position = initialPosition;
                     }
                 }
             }
-
             transform.position = initialPosition;
         }
     }
-
 
     private void OnMouseDrag()
     {
