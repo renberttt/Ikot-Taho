@@ -10,20 +10,16 @@ public class CustomerMovement : MonoBehaviour
 
     public float[] targetXPositions = { 6.75f, 2.25f, -2.25f, -6.75f };
     public float movementSpeed = 2f;
-    public float queueTime = 5f;
-
+    public float queueTime = 10f;
 
     private int currentTargetIndex;
     public bool isMoving = true;
 
     private static List<float> occupiedPositions = new List<float>();
 
-    private Vector3 spawnPosition;
-
     private void Start()
     {
         SetInitialTargetPosition();
-        spawnPosition = transform.position;
         orderSpawner.SetQueueTime(queueTime);
     }
 
@@ -35,7 +31,11 @@ public class CustomerMovement : MonoBehaviour
             float direction = Mathf.Sign(targetX - transform.position.x);
             bool nextPositionOccupied = IsNextPositionOccupied(targetX);
 
-            if (!nextPositionOccupied)
+            if (nextPositionOccupied)
+            {
+                SetNextTargetPosition();
+            }
+            else
             {
                 float newPositionX = transform.position.x + direction * movementSpeed * Time.deltaTime;
                 if ((direction > 0f && newPositionX >= targetX) || (direction < 0f && newPositionX <= targetX))
@@ -44,6 +44,7 @@ public class CustomerMovement : MonoBehaviour
                     isMoving = false;
                     orderSpawner.SpawnOrderAboveCustomer(transform.position, 0.5f);
                     AddOccupiedPosition(targetX);
+                    StartCoroutine(WaitAndMoveBack(targetX));
                     Debug.Log("Occupied Positions: " + string.Join(", ", occupiedPositions));
                 }
                 else
@@ -51,6 +52,27 @@ public class CustomerMovement : MonoBehaviour
                     transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
                 }
             }
+        }
+    }
+
+    private void SetNextTargetPosition()
+    {
+        int startingIndex = currentTargetIndex;
+        int nextTargetIndex = (currentTargetIndex + 1) % targetXPositions.Length;
+
+        while (nextTargetIndex != startingIndex && occupiedPositions.Contains(targetXPositions[nextTargetIndex]))
+        {
+            nextTargetIndex = (nextTargetIndex + 1) % targetXPositions.Length;
+        }
+
+        if (!occupiedPositions.Contains(targetXPositions[nextTargetIndex]))
+        {
+            currentTargetIndex = nextTargetIndex;
+        }
+        else
+        {
+            // No available position found, stop moving
+            isMoving = false;
         }
     }
     private bool IsNextPositionOccupied(float targetX)
@@ -84,13 +106,15 @@ public class CustomerMovement : MonoBehaviour
 
     private System.Collections.IEnumerator WaitAndMoveBack(float targetX)
     {
-
         yield return new WaitForSeconds(queueTime);
-        Vector3 originalPosition = transform.position;
-        Vector3 targetPosition = spawnPosition;
 
-        float journeyLength = Vector3.Distance(transform.position, targetPosition);
+        Vector3 originalPosition = transform.position;
+        float distanceToMove = 10f;
+
+        Vector3 targetPosition = originalPosition + Vector3.right * distanceToMove; // Move to the right
+
         float startTime = Time.time;
+        float journeyLength = Vector3.Distance(transform.position, targetPosition);
 
         while (true)
         {
@@ -110,6 +134,7 @@ public class CustomerMovement : MonoBehaviour
             yield return null;
         }
     }
+
 
     private void DecrementHealthBar()
     {

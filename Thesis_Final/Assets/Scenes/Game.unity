@@ -589,7 +589,7 @@ MonoBehaviour:
   customerSprites:
   - {fileID: 21300000, guid: 839ca12a8adde3c4881f2dbc437a273e, type: 3}
   - {fileID: 21300000, guid: ab7d6bee5e2b4144784e673db9275a05, type: 3}
-  spawnInterval: 5
+  spawnInterval: 2
   customerContainer: {fileID: 764501124}
 --- !u!1001 &964783206
 PrefabInstance:
@@ -1462,7 +1462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8355785871717761809, guid: 2b7ade73e0ad4504389179f75e8f78eb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8355785871717761814, guid: 2b7ade73e0ad4504389179f75e8f78eb, type: 3}
       propertyPath: m_RootOrder
