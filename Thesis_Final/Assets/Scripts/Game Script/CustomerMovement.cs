@@ -100,10 +100,37 @@ public class CustomerMovement : MonoBehaviour
     public void ReceiveOrder(float targetX)
     {
         Debug.Log("RECEIVED");
-        Destroy(gameObject);
+        //Destroy(gameObject);
         occupiedPositions.Remove(targetX);
+        StartCoroutine(MoveToRightAndDestroy());
     }
+    private System.Collections.IEnumerator MoveToRightAndDestroy()
+    {
+        Vector3 originalPosition = transform.position;
+        float distanceToMove = 10f;
+        Vector3 targetPosition = originalPosition + Vector3.right * distanceToMove; // Move to the right
 
+        float startTime = Time.time;
+        float journeyLength = Vector3.Distance(transform.position, targetPosition);
+
+        while (true)
+        {
+            float distanceCovered = (Time.time - startTime) * movementSpeed;
+            float fractionOfJourney = distanceCovered / journeyLength;
+            transform.position = Vector3.Lerp(originalPosition, targetPosition, fractionOfJourney);
+
+            if (fractionOfJourney >= 1f)
+            {
+                Vector3 currentPosition = transform.position;
+                transform.position = new Vector3(currentPosition.x, currentPosition.y, -1f); // Update the Z position to -1 (or any suitable value)
+                Destroy(gameObject);
+                Debug.LogWarning("Customer moved to the right and destroyed.");
+                break;
+            }
+
+            yield return null;
+        }
+    }
     private System.Collections.IEnumerator WaitAndMoveBack(float targetX)
     {
         yield return new WaitForSeconds(queueTime);
@@ -124,6 +151,8 @@ public class CustomerMovement : MonoBehaviour
 
             if (fractionOfJourney >= 1f)
             {
+                Vector3 currentPosition = transform.position;
+                transform.position = new Vector3(currentPosition.x, currentPosition.y, -1f); // Update the Z position to -1 (or any suitable value)
                 Destroy(gameObject);
                 occupiedPositions.Remove(targetX);
                 Debug.LogWarning("Occupied Positions: " + string.Join(", ", occupiedPositions));
@@ -134,7 +163,6 @@ public class CustomerMovement : MonoBehaviour
             yield return null;
         }
     }
-
 
     private void DecrementHealthBar()
     {

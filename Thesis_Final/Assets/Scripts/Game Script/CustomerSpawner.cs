@@ -26,7 +26,6 @@ public class CustomerSpawner : MonoBehaviour
             spawnTimer = 0f;
         }
     }
-
     private void SpawnCustomer()
     {
         GameObject customerPrefab = customerPrefabs[Random.Range(0, customerPrefabs.Length)];
@@ -34,7 +33,7 @@ public class CustomerSpawner : MonoBehaviour
         Vector3 spawnPosition = new Vector3(
             -480f, // X position
             220f,  // Y position
-            0f     // Z position
+            -1f    // Z position (modified to be -1)
         );
 
         GameObject newCustomer = Instantiate(customerPrefab, spawnPosition, Quaternion.identity);
@@ -48,7 +47,7 @@ public class CustomerSpawner : MonoBehaviour
         }
 
         // Set the "Customer" GameObject as the parent/container
-        newCustomer.transform.SetParent(customer.transform,false);
+        newCustomer.transform.SetParent(customer.transform, false);
     }
     // Method to toggle customer spawning pause
     public static void TogglePause(bool pause)
