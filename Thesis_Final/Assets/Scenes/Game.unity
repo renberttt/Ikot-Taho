@@ -280,12 +280,44 @@ PrefabInstance:
       value: -104
       objectReference: {fileID: 0}
     - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 468703820}
     - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 468703820}
+    - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadNextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LoadNextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FadeTransition, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383740930208747741, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5748520698634021891, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
       propertyPath: m_AnchorMax.y
@@ -596,11 +628,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d5df9b726e016469011ad3bfcbfee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerPrefabs:
-  - {fileID: 3157014360161235960, guid: 4a37a37d6a43a7d43b4736f9747f4009, type: 3}
-  customerSprites:
-  - {fileID: 21300000, guid: 839ca12a8adde3c4881f2dbc437a273e, type: 3}
+  customerPrefab: {fileID: 3157014360161235960, guid: 4a37a37d6a43a7d43b4736f9747f4009, type: 3}
+  cscsCustomer:
   - {fileID: 21300000, guid: ab7d6bee5e2b4144784e673db9275a05, type: 3}
+  - {fileID: 21300000, guid: 839ca12a8adde3c4881f2dbc437a273e, type: 3}
+  clacCustomer:
+  - {fileID: 21300000, guid: 69f32beaf0e978846805c7c3d71ff059, type: 3}
+  - {fileID: 21300000, guid: 110f9bb5e357d1040a207ad90c2a33ce, type: 3}
+  cthmCustomer:
+  - {fileID: 21300000, guid: dca163c9b18b73a41b60f76a05edb1b0, type: 3}
+  - {fileID: 21300000, guid: 66ccce39491995649b046e546121bd7a, type: 3}
+  cbaaCustomer:
+  - {fileID: 21300000, guid: 3d7d64d18100a9549896d9657c64ac48, type: 3}
+  - {fileID: 21300000, guid: 69f32beaf0e978846805c7c3d71ff059, type: 3}
+  ccjeCustomer:
+  - {fileID: 21300000, guid: 88ef49bfe34b94642b417f75ccc0fd3e, type: 3}
+  - {fileID: 21300000, guid: ddf44f7b073ee9b43807aee40a4a86a7, type: 3}
+  ceatCustomer:
+  - {fileID: 21300000, guid: 65fe652525092294cae2850566a858bd, type: 3}
+  - {fileID: 21300000, guid: 65fe652525092294cae2850566a858bd, type: 3}
+  coedCustomer:
+  - {fileID: 21300000, guid: 110f9bb5e357d1040a207ad90c2a33ce, type: 3}
+  - {fileID: 21300000, guid: d404d9db318586148a97cb6bfb203f5d, type: 3}
   spawnInterval: 2
   customerContainer: {fileID: 764501124}
 --- !u!1001 &964783206
@@ -1475,7 +1524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8355785871717761809, guid: 2b7ade73e0ad4504389179f75e8f78eb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8355785871717761814, guid: 2b7ade73e0ad4504389179f75e8f78eb, type: 3}
       propertyPath: m_RootOrder

@@ -18,6 +18,8 @@ public class FadeTransition : MonoBehaviour
         }
 
         StartCoroutine(LoadLevel(sceneIndex));
+        CustomerMovement.ResetOccupiedPositions();
+
     }
     IEnumerator LoadLevel(int sceneIndex){
         transition.SetTrigger("Start");
