@@ -217,8 +217,8 @@ public class Cup : MonoBehaviour
                         if (customerOrder != null)
                         {
                             customerOrder.GiveToCustomer();
-                            customer.ReceiveOrder(transform.position.x);
-
+                            // Pass the targetX position to ReceiveOrder
+                            customer.ReceiveOrder(customer.targetXPositions[customer.currentTargetIndex]);
                         }
                         return;
                     }

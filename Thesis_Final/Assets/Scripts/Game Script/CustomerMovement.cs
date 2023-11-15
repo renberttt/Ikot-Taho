@@ -12,7 +12,7 @@ public class CustomerMovement : MonoBehaviour
     public float movementSpeed = 2f;
     public float queueTime = 10f;
 
-    private int currentTargetIndex;
+    public int currentTargetIndex;
     public bool isMoving = true;
 
     private static List<float> occupiedPositions = new List<float>();
@@ -97,11 +97,11 @@ public class CustomerMovement : MonoBehaviour
         }
     }
 
-    public void ReceiveOrder(float currentXPosition)
+    public void ReceiveOrder(float targetX)
     {
         Debug.Log("RECEIVED");
         Destroy(gameObject);
-        occupiedPositions.Remove(currentXPosition);
+        occupiedPositions.Remove(targetX);
     }
 
     private System.Collections.IEnumerator WaitAndMoveBack(float targetX)
