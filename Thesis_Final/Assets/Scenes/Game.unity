@@ -243,6 +243,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3086790335110065519, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4501499390702500778, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
       propertyPath: m_Name
       value: Pause POPUP
@@ -305,12 +309,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5748520698634021891, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -192
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 8319022495689437878, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 8319022495689437878, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319022495689437878, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1790237433
+      objectReference: {fileID: 0}
     - target: {fileID: 8886366131899303155, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -333,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8886366131899303155, guid: 926bab2e4189da64eb5f1817c70a55fa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -16
+      value: -192
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1099,7 +1111,11 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 7943708092290667469, guid: 8b2112a1775244248b28baec233b47d8, type: 3}
       propertyPath: m_SortingOrder
-      value: 11
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943708092290667469, guid: 8b2112a1775244248b28baec233b47d8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1790237433
       objectReference: {fileID: 0}
     - target: {fileID: 7998610413383197107, guid: 8b2112a1775244248b28baec233b47d8, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1342,9 +1358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f388940eb8c30b54d9497309c4d58d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgrounds: []
-  customerSets: []
-  difficultyLevels: []
 --- !u!4 &1757205459
 Transform:
   m_ObjectHideFlags: 0
@@ -2284,6 +2297,7 @@ GameObject:
   - component: {fileID: 8099562972070224342}
   - component: {fileID: 4929537454513690254}
   - component: {fileID: 3307438071925133318}
+  - component: {fileID: 8099562972070224343}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -3325,7 +3339,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 293ebea3425308b42a52c8b9d5e1ff7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45229f115bb6e6e4ea9efc3fe7de2c36, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3500,6 +3514,27 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &8099562972070224343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979883589429937368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6358e7b2a999bf042ab1cf9c583fcdaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayImage: {fileID: 7316199885756710611}
+  images:
+  - {fileID: 21300000, guid: 45229f115bb6e6e4ea9efc3fe7de2c36, type: 3}
+  - {fileID: 21300000, guid: 46d409dbdd9d674428764dc1b86df03f, type: 3}
+  - {fileID: 21300000, guid: 730dbbbb2dfb44141a50260474b2d569, type: 3}
+  - {fileID: 21300000, guid: c0eecd904d8612147b9fa3c1ad41b3ae, type: 3}
+  - {fileID: 21300000, guid: fb1c424f8545fdd4283f6898dc2041b0, type: 3}
+  - {fileID: 21300000, guid: 8cda46b53fd12d042be596595d5b160a, type: 3}
+  - {fileID: 21300000, guid: 85e18232b22c1d042851d5b9d675b41b, type: 3}
 --- !u!212 &8309690209011987522
 SpriteRenderer:
   m_ObjectHideFlags: 0

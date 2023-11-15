@@ -41,7 +41,7 @@ public class AudioManager : MonoBehaviour
         sceneBackgroundMusic["Stage Selection"] = background;
         sceneBackgroundMusic["Difficulty Selection"] = background;
         sceneBackgroundMusic["Shop"] = background;
-        sceneBackgroundMusic["CSCS_GAME"] = backgroundGame;
+        sceneBackgroundMusic["Game"] = backgroundGame;
 
         int sceneCount = SceneManager.sceneCount;
         for (int i = 0; i < sceneCount; i++)

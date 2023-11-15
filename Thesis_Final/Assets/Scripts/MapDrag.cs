@@ -42,8 +42,8 @@ public class DragMap : MonoBehaviour
 
     private void CalculateCameraBounds()
     {
-        float cameraHeight = mainCamera.orthographicSize;
-        float cameraWidth = cameraHeight * mainCamera.aspect;
+        float cameraHeight = mainCamera.orthographicSize / .8f;
+        float cameraWidth = cameraHeight * mainCamera.aspect / .9f;
 
         cameraMin = new Vector2(mainCamera.transform.position.x - cameraWidth, mainCamera.transform.position.y - cameraHeight);
         cameraMax = new Vector2(mainCamera.transform.position.x + cameraWidth, mainCamera.transform.position.y + cameraHeight);

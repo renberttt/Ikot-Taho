@@ -188,4 +188,8 @@ public class CustomerMovement : MonoBehaviour
     {
         isMoving = false;
     }
+    public static void ResetOccupiedPositions()
+    {
+        occupiedPositions.Clear();
+    }
 }

@@ -12,6 +12,7 @@ public class ButtonImageDisplay : MonoBehaviour
         if (index >= 0 && index < images.Length)
         {
             displayImage.sprite = images[index];
+            PlayerPrefs.SetInt("SelectedImageIndex", index);
         }
     }
 }

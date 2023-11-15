@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class FadeTransition : MonoBehaviour
 {
     public Animator transition;
-    
     public float transitionTime = 1f;
     public static bool IsPaused { get; private set; }
 
@@ -41,21 +40,15 @@ public class FadeTransition : MonoBehaviour
     public void TogglePause()
     {
         IsPaused = !IsPaused;
-
-        // Trigger pause or resume functionality in other scripts
         Time.timeScale = IsPaused ? 0f : 1f;
-        //CustomerSpawner.toggle;
-        //CustomerMovement.TogglePause(IsPaused);
     }
     public void Restart()
     {
-        // Unpause the game if it was paused.
         if (IsPaused)
         {
             TogglePause();
         }
-
-        // Restart the current scene.
+        CustomerMovement.ResetOccupiedPositions();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

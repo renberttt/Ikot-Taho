@@ -243,9 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118bc4f2bd7ae3a4c867df5e38075779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easyButton: {fileID: 0}
-  mediumButton: {fileID: 0}
-  hardButton: {fileID: 0}
+  gameController: {fileID: 1501898224}
+  difficulty: 
 --- !u!1001 &127667039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -432,9 +431,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 27507685}
-        m_TargetAssemblyTypeName: UnityEngine.Component, UnityEngine
-        m_MethodName: SendMessage
+      - m_Target: {fileID: 1501898224}
+        m_TargetAssemblyTypeName: MainGameController, Assembly-CSharp
+        m_MethodName: SetDifficulty
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -560,30 +559,18 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 290421918}
+  m_TargetGraphic: {fileID: 183146886}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1981895931}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 127667040}
+        m_TargetAssemblyTypeName: FadeTransition, Assembly-CSharp
+        m_MethodName: LoadNextLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 27507680}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -598,6 +585,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1501898224}
+        m_TargetAssemblyTypeName: MainGameController, Assembly-CSharp
+        m_MethodName: SetDifficulty
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Hard
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &290421918
@@ -1288,6 +1287,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2386540718663613076, guid: b663ed83abb049b4ea0e5fd2dc5b7b80, type: 3}
   m_PrefabInstance: {fileID: 1495339162}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1501898224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3081200105165253489, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+  m_PrefabInstance: {fileID: 3185666296499756869}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388940eb8c30b54d9497309c4d58d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1646021765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,30 +1626,18 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2023992967}
+  m_TargetGraphic: {fileID: 183146886}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1981895931}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 127667040}
+        m_TargetAssemblyTypeName: FadeTransition, Assembly-CSharp
+        m_MethodName: LoadNextLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 27507680}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1654,6 +1652,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1501898224}
+        m_TargetAssemblyTypeName: MainGameController, Assembly-CSharp
+        m_MethodName: SetDifficulty
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Medium
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2023992967
@@ -1839,6 +1849,64 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b663ed83abb049b4ea0e5fd2dc5b7b80, type: 3}
+--- !u!1001 &3185666296499756869
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6770097579239451368, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_Name
+      value: MainGameController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.4622834
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.6974416
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 216.284
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894510779759720754, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3503781931296373842, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0d6a5a0a87166746b56c481e18ab046, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1849,3 +1917,4 @@ SceneRoots:
   - {fileID: 27507684}
   - {fileID: 1956108880}
   - {fileID: 674802859}
+  - {fileID: 3185666296499756869}
