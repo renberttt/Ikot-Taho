@@ -9,25 +9,26 @@ public class ScoreText : MonoBehaviour
     private void Start()
     {
         scoreText = GetComponent<Text>();
+
+        if (scoreText == null)
+        {
+            Debug.LogError("ScoreText script requires a Text component.");
+        }
+
         UpdateScoreText();
     }
 
-    public void AddScore(int value)
+    public void IncrementScore(int points)
     {
-        score += value;
+        score += points;
         UpdateScoreText();
-    }
-
-    public int GetScore()
-    {
-        return score;
     }
 
     private void UpdateScoreText()
     {
         if (scoreText != null)
         {
-            scoreText.text = score.ToString();
+            scoreText.text = " " + score.ToString();
         }
     }
 }

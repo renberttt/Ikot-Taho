@@ -20,11 +20,20 @@ public class Cup : MonoBehaviour
 
     private CustomerMovement customerMovement;
     public CustomerOrder customerOrder;
+
+    public ScoreText scoreText;
     private MainGameController mainGameController;
+
+    
 
     private void Start()
     {
         initialPosition = transform.position;
+
+        if (scoreText == null)
+        {
+            scoreText = FindObjectOfType<ScoreText>();
+        }
     }
 
     private Dictionary<string, int> ingredientCombinations = new Dictionary<string, int>()
@@ -217,8 +226,10 @@ public class Cup : MonoBehaviour
                         if (customerOrder != null)
                         {
                             customerOrder.GiveToCustomer();
+                            
                             // Pass the targetX position to ReceiveOrder
                             customer.ReceiveOrder(customer.targetXPositions[customer.currentTargetIndex]);
+                             scoreText.IncrementScore(50);
                         }
                         return;
                     }
