@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class BackgoundChanger : MonoBehaviour
 {
+    private Cup cup;
     public Image displayImage;
     public GameObject tahoImage;
     public GameObject pearlImage;

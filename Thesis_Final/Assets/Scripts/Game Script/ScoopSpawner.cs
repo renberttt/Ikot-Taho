@@ -9,7 +9,7 @@ public class ScoopSpawner : MonoBehaviour
     public Sprite[] soyaSprite;
     public Sprite[] pearlSprite;
     public Sprite[] syrupSprite;
-
+    
     private GameObject currentScoop;
     private bool canInteractWithScoop = true;
     private bool isDragging = false;

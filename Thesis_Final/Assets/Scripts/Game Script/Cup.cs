@@ -1,43 +1,45 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class LayerSprites
+{
+    public Sprite[] layer1;
+    public Sprite[] layer2;
+    public Sprite[] layer3 = new Sprite[10];
+}
 public class Cup : MonoBehaviour
 {
+    public CustomerOrder customerOrder;
+    public ScoreText scoreText;
+
     private Vector3 initialPosition;
     private Vector3 offset;
 
     private bool isDragging = false;
+    private int selectedStage;
 
     public SpriteRenderer cupRenderer;
-    public Sprite[] firstLayerSprites;
-    public Sprite[] secondLayerSprites;
-    public Sprite[] thirdLayerSprites;
+    private Sprite[][] firstLayerSprites;
+    public Sprite[][] secondLayerSprites;
+    public Sprite[][] thirdLayerSprites;
+
+    public LayerSprites CSCS;
+    public LayerSprites CLAC;
+    public LayerSprites CTHM;
+    public LayerSprites CCJE;
+    public LayerSprites COED;
+    public LayerSprites CEAT;
+    public LayerSprites CBAA;
 
     private List<string> firstLayerIngredients = new List<string>();
     private List<string> secondLayerIngredients = new List<string>();
     private List<string> thirdLayerIngredients = new List<string>();
 
-    private CustomerMovement customerMovement;
-    public CustomerOrder customerOrder;
-
-    public ScoreText scoreText;
-    private MainGameController mainGameController;
-
-    
-
-    private void Start()
-    {
-        initialPosition = transform.position;
-
-        if (scoreText == null)
-        {
-            scoreText = FindObjectOfType<ScoreText>();
-        }
-    }
-
     private Dictionary<string, int> ingredientCombinations = new Dictionary<string, int>()
     {
+
         //Second Layer Combinations
         {"Pearls&Pearls", 0},
         {"Soya&Soya", 1},
@@ -58,6 +60,53 @@ public class Cup : MonoBehaviour
         {"Syrup&Syrup&Pearls", 8},
         {"Soya&Soya&Pearls", 9},
     };
+    private void Start()
+    {
+        initialPosition = transform.position;
+
+        if (scoreText == null)
+        {
+            scoreText = FindObjectOfType<ScoreText>();
+        }
+
+        selectedStage = PlayerPrefs.GetInt("SelectedStage", 0);
+        InitializeSprites();
+    }
+    private void InitializeSprites()
+    {
+        firstLayerSprites = new Sprite[][]
+        {
+        CSCS.layer1,
+        CLAC.layer1,
+        CTHM.layer1,
+        CCJE.layer1,
+        COED.layer1,
+        CEAT.layer1,
+        CBAA.layer1,
+        };
+
+        secondLayerSprites = new Sprite[][]
+        {
+        CSCS.layer2,
+        CLAC.layer2,
+        CTHM.layer2,
+        CCJE.layer2,
+        COED.layer2,
+        CEAT.layer2,
+        CBAA.layer2,
+        };
+
+        thirdLayerSprites = new Sprite[][]
+        {
+        CSCS.layer3,
+        CLAC.layer3,
+        CTHM.layer3,
+        CCJE.layer3,
+        COED.layer3,
+        CEAT.layer3,
+        CBAA.layer3,
+        };
+    }
 
     private void LogIngredients()
     {
@@ -100,7 +149,7 @@ public class Cup : MonoBehaviour
 
     private void UpdateFirstLayerSprite(string ingredientName)
     {
-        Sprite selectedSprite = GetSpriteForFirstLayer(ingredientName);
+        Sprite selectedSprite = GetSpriteForFirstLayer(selectedStage, ingredientName);
 
         if (selectedSprite != null)
         {
@@ -109,7 +158,7 @@ public class Cup : MonoBehaviour
     }
     private void UpdateSecondLayerSprite(string ingredientName1, string ingredientName2)
     {
-        Sprite selectedSprite = GetSpriteForSecondLayer(ingredientName1, ingredientName2);
+        Sprite selectedSprite = GetSpriteForSecondLayer(selectedStage, ingredientName1, ingredientName2);
 
         if (selectedSprite != null)
         {
@@ -118,7 +167,7 @@ public class Cup : MonoBehaviour
     }
     private void UpdateThirdLayerSprite(string ingredientName1, string ingredientName2, string ingredientName3)
     {
-        Sprite selectedSprite = GetSpriteForThirdLayer(ingredientName1, ingredientName2, ingredientName3);
+        Sprite selectedSprite = GetSpriteForThirdLayer(selectedStage, ingredientName1, ingredientName2, ingredientName3);
 
         if (selectedSprite != null)
         {
@@ -126,24 +175,24 @@ public class Cup : MonoBehaviour
         }
     }
 
-    private Sprite GetSpriteForFirstLayer(string ingredientName)
+    private Sprite GetSpriteForFirstLayer(int level, string ingredientName)
     {
         if (ingredientName == "Soya")
         {
-            return firstLayerSprites[0];
+            return firstLayerSprites[level][0];
         }
         else if (ingredientName == "Pearls")
         {
-            return firstLayerSprites[1];
+            return firstLayerSprites[level][1];
         }
         else if (ingredientName == "Syrup")
         {
-            return firstLayerSprites[2];
+            return firstLayerSprites[level][2];
         }
 
         return null;
     }
-    private Sprite GetSpriteForSecondLayer(string ingredientName1, string ingredientName2)
+    private Sprite GetSpriteForSecondLayer(int level, string ingredientName1, string ingredientName2)
     {
         string combination1 = ingredientName1 + "&" + ingredientName2;
         string combination2 = ingredientName2 + "&" + ingredientName1;
@@ -152,13 +201,13 @@ public class Cup : MonoBehaviour
         {
             if (spriteIndex >= 0 && spriteIndex < secondLayerSprites.Length)
             {
-                return secondLayerSprites[spriteIndex];
+                return secondLayerSprites[level][spriteIndex];
             }
         }
 
         return null;
     }
-    private Sprite GetSpriteForThirdLayer(string ingredientName1, string ingredientName2, string ingredientName3)
+    private Sprite GetSpriteForThirdLayer(int level, string ingredientName1, string ingredientName2, string ingredientName3)
     {
         string[] combinations = {
         ingredientName1 + "&" + ingredientName2 + "&" + ingredientName3,
@@ -177,9 +226,11 @@ public class Cup : MonoBehaviour
         {
             if (ingredientCombinations.TryGetValue(combination, out int spriteIndex))
             {
-                if (spriteIndex >= 0 && spriteIndex < thirdLayerSprites.Length)
+                if (spriteIndex >= 0 && spriteIndex < combinations.Length)
                 {
-                    return thirdLayerSprites[spriteIndex];
+                    Debug.Log(combination);
+                    Debug.Log(thirdLayerSprites.Length.ToString());
+                    return thirdLayerSprites[level][spriteIndex];
                 }
             }
         }
@@ -229,7 +280,7 @@ public class Cup : MonoBehaviour
                             
                             // Pass the targetX position to ReceiveOrder
                             customer.ReceiveOrder(customer.targetXPositions[customer.currentTargetIndex]);
-                             //scoreText.IncrementScore(50);
+                             scoreText.IncrementScore(50);
                         }
                         return;
                     }
