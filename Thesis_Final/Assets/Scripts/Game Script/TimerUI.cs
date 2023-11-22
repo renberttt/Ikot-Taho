@@ -33,7 +33,7 @@ public class TimerUI : MonoBehaviour
         {
             isTimerRunning = false;
             Debug.Log("Time's up!");
-          //  CheckWinCondition();
+            CheckWinCondition();
         }
     }
 
@@ -63,23 +63,23 @@ public class TimerUI : MonoBehaviour
         isTimerRunning = false;
     }
 
-    // private void CheckWinCondition()
-    // {
-    //     ScoreText scoreText = FindObjectOfType<ScoreText>();
+    private void CheckWinCondition()
+    {
+        ScoreText scoreText = FindObjectOfType<ScoreText>();
 
-    //     if (scoreText != null && scoreText.GetScore() >= 500)
-    //     {
-    //         Instantiate(winObjectPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
-    //         Debug.Log("You Win!");
-    //         PauseGame();
-    //     }
-    //     else
-    //     {
-    //         SpawnLoseGameObject();
-    //         Debug.Log("You Lose!");
-    //         PauseGame();
-    //     }
-    // }
+        if (scoreText != null && scoreText.score >= 500)
+        {
+            Instantiate(winObjectPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            Debug.Log("You Win!");
+            PauseGame();
+        }
+        else
+        {
+            SpawnLoseGameObject();
+            Debug.Log("You Lose!");
+            PauseGame();
+        }
+    }
 
     private void SpawnLoseGameObject()
     {

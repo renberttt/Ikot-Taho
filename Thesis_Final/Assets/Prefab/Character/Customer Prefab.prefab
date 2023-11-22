@@ -156,7 +156,7 @@ MonoBehaviour:
   - -2.25
   - -6.75
   movementSpeed: 5
-  queueTime: 1
+  queueTime: 5
   currentTargetIndex: 0
   isMoving: 1
 --- !u!114 &1615031021319226661
@@ -173,4 +173,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerMovement: {fileID: 0}
   orderPrefab: {fileID: 8230313833100020665, guid: 01eadcc04d922dc44b436ae5d96d5c52, type: 3}
-  spawnedOrder: {fileID: 0}
+  cscsCustomer:
+  - {fileID: 21300000, guid: cc3275c3f46c4194b98aee92809730ca, type: 3}
+  - {fileID: 21300000, guid: b8704bc0d49bff04eb827e01e4d2717b, type: 3}
+  - {fileID: 21300000, guid: 55c6b43e07ac9d54695930c987785c2a, type: 3}
+  - {fileID: 21300000, guid: 28880f7cf7073a74c83c8dacff6ae190, type: 3}
+  - {fileID: 21300000, guid: 8f261d5cfbac2e94ca29257fe3ab7004, type: 3}
+  - {fileID: 21300000, guid: 51b82bb75c01f0c419dc159124c503be, type: 3}
+  - {fileID: 21300000, guid: 46273c6fa1aaf2642baf4ea1e3d37c44, type: 3}
+  clacCustomer:
+  - {fileID: 21300000, guid: 4a08ea5c03d263d4cbb2c6b17339d976, type: 3}
+  - {fileID: 21300000, guid: 96ad9fa844f76cf49bd34645d59f58aa, type: 3}
+  - {fileID: 21300000, guid: 7efd85fc9a23ab146863152aa92c4493, type: 3}
+  - {fileID: 21300000, guid: a34507c7ce10e1c498f21d26d2970d15, type: 3}
+  - {fileID: 21300000, guid: 54af5518b87f6c64b80ec65c78727a6c, type: 3}
+  - {fileID: 21300000, guid: 954c8e1eef08c5346baf7d7421812394, type: 3}
+  cthmCustomer:
+  - {fileID: 21300000, guid: eb014039074d3b74f8b9535a58477f38, type: 3}
+  - {fileID: 21300000, guid: 95eb2debbd7a48b42bb133522f0a1769, type: 3}
+  - {fileID: 21300000, guid: d2659b8f4f862e44ea30fc88c41923d7, type: 3}
+  - {fileID: 21300000, guid: 76cb5908efc2e57429f21d018dd2ce37, type: 3}
+  - {fileID: 21300000, guid: 757d65a7314f65249a42fd1b01d72a36, type: 3}
+  - {fileID: 21300000, guid: 733a5e74ee02993419d9ed81eefcd3bc, type: 3}
+  ccjeCustomer:
+  - {fileID: 21300000, guid: ee6d4a66be5533f478d742857a52db9e, type: 3}
+  - {fileID: 21300000, guid: 56cbf4395e6352543931aa2df4412620, type: 3}
+  - {fileID: 21300000, guid: 3ebf8d3dae7b92847938d101d0a53d24, type: 3}
+  - {fileID: 21300000, guid: af3e3277585865142b56dcf9d169191f, type: 3}
+  - {fileID: 21300000, guid: e057219069a92cb499d1d6e8bdb25f6e, type: 3}
+  - {fileID: 21300000, guid: d557c99f194bf4044abeac544c9dcd40, type: 3}
+  coedCustomer:
+  - {fileID: 21300000, guid: d28b3f2abe339f843afcb6aa2015d77f, type: 3}
+  - {fileID: 21300000, guid: 3037990f7902654459d3eba50eab12dc, type: 3}
+  - {fileID: 21300000, guid: 173c76e6e8810b340a38671533eb6a85, type: 3}
+  - {fileID: 21300000, guid: 226e1fe2ff558454199f8124775fefe4, type: 3}
+  - {fileID: 21300000, guid: 4cabd2da0f9d5df45b85be50475e5ed7, type: 3}
+  - {fileID: 21300000, guid: 2616c82ebc424bc46b4b65752719d201, type: 3}
+  ceatCustomer:
+  - {fileID: 21300000, guid: 89295bed97879d542b4b023786d441ac, type: 3}
+  - {fileID: 21300000, guid: 75c38d076b7efe144b6a3f2198217248, type: 3}
+  - {fileID: 21300000, guid: 040df765f55a59549b973be79f3921da, type: 3}
+  - {fileID: 21300000, guid: 907532b35724c06478c20228346fcd48, type: 3}
+  - {fileID: 21300000, guid: 0f5d3e7750d59784ab222da61de99dae, type: 3}
+  - {fileID: 21300000, guid: 613d6357f4867d34fad1bc484b4a5893, type: 3}
+  cbaaCustomer:
+  - {fileID: 21300000, guid: f05cea392cfbd4e4fb1a4d03701e6661, type: 3}
+  - {fileID: 21300000, guid: 28fdee26e4029bf46a54f9a8051035ca, type: 3}
+  - {fileID: 21300000, guid: 64441033deb4f08478e3ce7c3d487a8a, type: 3}
+  - {fileID: 21300000, guid: f119e589c3401b041a6f22595f14c0dc, type: 3}
+  - {fileID: 21300000, guid: 719daa78dac01794385f63c426091a33, type: 3}
+  - {fileID: 21300000, guid: 176b1ec6b91c7e541a9e20cb2f70a8ab, type: 3}

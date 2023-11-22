@@ -50,7 +50,6 @@ public class CustomerMovement : MonoBehaviour
                     orderSpawner.SpawnOrderAboveCustomer(transform.position, 0.5f);
                     AddOccupiedPosition(targetX);
                     StartCoroutine(WaitAndMoveBack(targetX));
-                    Debug.Log("Occupied Positions: " + string.Join(", ", occupiedPositions));
                 }
                 else
                 {
@@ -76,7 +75,6 @@ public class CustomerMovement : MonoBehaviour
         }
         else
         {
-            // No available position found, stop moving
             isMoving = false;
         }
     }
@@ -104,11 +102,10 @@ public class CustomerMovement : MonoBehaviour
 
     public void ReceiveOrder(float targetX)
     {
-        Debug.Log("RECEIVED");
-        //Destroy(gameObject);
         occupiedPositions.Remove(targetX);
         StartCoroutine(MoveToRightAndDestroy());
     }
+
     private System.Collections.IEnumerator MoveToRightAndDestroy()
     {
         Vector3 originalPosition = transform.position;
@@ -129,13 +126,13 @@ public class CustomerMovement : MonoBehaviour
                 Vector3 currentPosition = transform.position;
                 transform.position = new Vector3(currentPosition.x, currentPosition.y, -1f); // Update the Z position to -1 (or any suitable value)
                 Destroy(gameObject);
-                Debug.LogWarning("Customer moved to the right and destroyed.");
                 break;
             }
 
             yield return null;
         }
     }
+
     private System.Collections.IEnumerator WaitAndMoveBack(float targetX)
     {
         yield return new WaitForSeconds(queueTime);
@@ -160,7 +157,6 @@ public class CustomerMovement : MonoBehaviour
                 transform.position = new Vector3(currentPosition.x, currentPosition.y, -1f); // Update the Z position to -1 (or any suitable value)
                 Destroy(gameObject);
                 occupiedPositions.Remove(targetX);
-                Debug.LogWarning("Occupied Positions: " + string.Join(", ", occupiedPositions));
                 DecrementHealthBar();
                 break;
             }
@@ -170,33 +166,26 @@ public class CustomerMovement : MonoBehaviour
     }
 
     private void DecrementHealthBar()
-{
-    if (healthManager != null && healthManager.healthText != null)
     {
-        int currentHealth = int.Parse(healthManager.healthText.text);
-
-        // Decrease health
-        currentHealth--;
-
-        Debug.Log("-1 HP");
-
-        healthManager.healthText.text = currentHealth.ToString();
+        if (healthManager != null && healthManager.healthText != null)
+        {
+            int currentHealth = int.Parse(healthManager.healthText.text);
+            currentHealth--;
+            healthManager.healthText.text = currentHealth.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("No Text component found for the health bar.");
+        }
     }
-    else
-    {
-        Debug.LogWarning("No Text component found for the health bar.");
-    }
-}
-
 
     public void StopMoving()
     {
         isMoving = false;
     }
+
     public static void ResetOccupiedPositions()
     {
         occupiedPositions.Clear();
     }
-
-    
 }

@@ -2155,10 +2155,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 58674a88450a73e488a34e7dc22023ae, type: 3}
   - {fileID: 21300000, guid: 28d8637a9cbc905478298fbbbb4f1216, type: 3}
   - {fileID: 21300000, guid: 2ac6f8501ef6bce4eb8005e0a5f0a4ae, type: 3}
-  - {fileID: 21300000, guid: 8fe8889c79e1c5f4f9e59c1b3ef288dd, type: 3}
   - {fileID: 21300000, guid: 049942bc2ab79e3439b299d0405b620d, type: 3}
-  - {fileID: 21300000, guid: 2d5422c43f07b1642b6f97c87b8d683c, type: 3}
   - {fileID: 21300000, guid: 4b1f6e0bd9b5e664aad55690c6b5cc79, type: 3}
+  - {fileID: 21300000, guid: 2d5422c43f07b1642b6f97c87b8d683c, type: 3}
+  - {fileID: 21300000, guid: 8fe8889c79e1c5f4f9e59c1b3ef288dd, type: 3}
 --- !u!1 &1337907015
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,10 +2812,10 @@ RectTransform:
   - {fileID: 1475341907}
   - {fileID: 1685456103}
   - {fileID: 593600923}
-  - {fileID: 2097335078}
   - {fileID: 681926353}
-  - {fileID: 1337907016}
   - {fileID: 767845888}
+  - {fileID: 1337907016}
+  - {fileID: 2097335078}
   m_Father: {fileID: 1306086350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

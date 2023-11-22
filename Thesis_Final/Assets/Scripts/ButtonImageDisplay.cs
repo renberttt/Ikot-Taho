@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ButtonImageDisplay : MonoBehaviour
 {
     public Image displayImage;
-    public Sprite[] images;    
+    public Sprite[] images;  
     public void OnButtonClick(Button button)
     {
         int index = System.Array.IndexOf(GetComponentsInChildren<Button>(), button);
@@ -12,7 +12,7 @@ public class ButtonImageDisplay : MonoBehaviour
         if (index >= 0 && index < images.Length)
         {
             displayImage.sprite = images[index];
-            PlayerPrefs.SetInt("SelectedImageIndex", index);
+            PlayerPrefs.SetInt("SelectedStage", index);
         }
     }
 }

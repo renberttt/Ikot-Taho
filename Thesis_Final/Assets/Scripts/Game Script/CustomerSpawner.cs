@@ -5,49 +5,26 @@ using UnityEngine;
 public class CustomerSpawner : MonoBehaviour
 {
     public GameObject customerPrefab;
+
     public Sprite[] cscsCustomer;
     public Sprite[] clacCustomer;
     public Sprite[] cthmCustomer;
-    public Sprite[] cbaaCustomer;
     public Sprite[] ccjeCustomer;
-    public Sprite[] ceatCustomer;
     public Sprite[] coedCustomer;
+    public Sprite[] ceatCustomer;
+    public Sprite[] cbaaCustomer;
+
     public float spawnInterval = 10f;
     public Transform customerContainer;
 
     private float spawnTimer = 0f; // Timer to track the spawn interval
     private Sprite[] selectedCustomerSet;
     private static bool isSpawningPaused;
+    private CustomerOrder customerOrder;
 
     private void Start()
     {
-        int selectedImageIndex = PlayerPrefs.GetInt("SelectedImageIndex", 0);
-        Debug.Log(PlayerPrefs.GetInt("SelectedImageIndex", 0));
-
-        switch (selectedImageIndex)
-        {
-            case 0:
-                selectedCustomerSet = cscsCustomer;
-                break;
-            case 1:
-                selectedCustomerSet = clacCustomer;
-                break;
-            case 2:
-                selectedCustomerSet = cthmCustomer;
-                break;
-            case 3:
-                selectedCustomerSet = cbaaCustomer;
-                break;
-            case 4:
-                selectedCustomerSet = ccjeCustomer;
-                break;
-            case 5:
-                selectedCustomerSet = ceatCustomer;
-                break;
-            case 6:
-                selectedCustomerSet = coedCustomer;
-                break;
-        }
+        SetSelectedCustomerSet();
     }
     private void Update()
     {
@@ -83,7 +60,35 @@ public class CustomerSpawner : MonoBehaviour
         // Set the "Customer" GameObject as the parent/container
         newCustomer.transform.SetParent(customer.transform, false);
     }
-    // Method to toggle customer spawning pause
+    private void SetSelectedCustomerSet()
+    {
+        int selectedImageIndex = PlayerPrefs.GetInt("SelectedStage", 0);
+
+        switch (selectedImageIndex)
+        {
+            case 0:
+                selectedCustomerSet = cscsCustomer;
+                break;
+            case 1:
+                selectedCustomerSet = clacCustomer;
+                break;
+            case 2:
+                selectedCustomerSet = cthmCustomer;
+                break;
+            case 3:
+                selectedCustomerSet = ccjeCustomer;
+                break;
+            case 4:
+                selectedCustomerSet = coedCustomer;
+                break;
+            case 5:
+                selectedCustomerSet = ceatCustomer;
+                break;
+            case 6:
+                selectedCustomerSet = cbaaCustomer;
+                break;
+        }
+    }
     public static void TogglePause(bool pause)
     {
         isSpawningPaused = pause;

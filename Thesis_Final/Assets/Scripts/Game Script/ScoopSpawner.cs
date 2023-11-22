@@ -5,6 +5,11 @@ using UnityEngine;
 public class ScoopSpawner : MonoBehaviour
 {
     public GameObject scoopPrefab;
+
+    public Sprite[] soyaSprite;
+    public Sprite[] pearlSprite;
+    public Sprite[] syrupSprite;
+
     private GameObject currentScoop;
     private bool canInteractWithScoop = true;
     private bool isDragging = false;
@@ -29,6 +34,7 @@ public class ScoopSpawner : MonoBehaviour
             clickPosition.z = 0f;
 
             currentScoop = Instantiate(scoopPrefab, clickPosition, Quaternion.identity);
+            ChangeScoopSpriteBasedOnIndex();
             canInteractWithScoop = false;
             offset = currentScoop.transform.position - clickPosition;
             isDragging = true;
@@ -67,7 +73,6 @@ public class ScoopSpawner : MonoBehaviour
         }
     }
 
-
     private void OnMouseDrag()
     {
         if (isDragging)
@@ -76,4 +81,35 @@ public class ScoopSpawner : MonoBehaviour
             currentScoop.transform.position = new Vector3(mousePosition.x + offset.x, mousePosition.y + offset.y, currentScoop.transform.position.z);
         }
     }
+    private void ChangeScoopSpriteBasedOnIndex()
+    {
+        int selectedImageIndex = PlayerPrefs.GetInt("SelectedStage", 0);
+
+        SpriteRenderer spriteRenderer = currentScoop.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            string scoopName = currentScoop.name;
+            if (scoopName == "Taho Scoop(Clone)")
+            {
+                spriteRenderer.sprite = soyaSprite[selectedImageIndex];
+            }
+            else if (scoopName == "Pearl Scoop(Clone)")
+            {
+                spriteRenderer.sprite = pearlSprite[selectedImageIndex];
+            }
+            else if (scoopName == "Syrup Scoop(Clone)")
+            {
+                spriteRenderer.sprite = syrupSprite[selectedImageIndex];
+            }
+            else
+            {
+                Debug.LogWarning("Selected scoop not recognized.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("SpriteRenderer not found.");
+        }
+    }
+
 }

@@ -229,7 +229,7 @@ public class Cup : MonoBehaviour
                             
                             // Pass the targetX position to ReceiveOrder
                             customer.ReceiveOrder(customer.targetXPositions[customer.currentTargetIndex]);
-                             scoreText.IncrementScore(50);
+                             //scoreText.IncrementScore(50);
                         }
                         return;
                     }

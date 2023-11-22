@@ -9,8 +9,6 @@ public class HealthManager : MonoBehaviour
 
     private int maxHealth;
     private int currentHealth;
-
-    // Array to store the original colors of the hearts
     private Color[] originalColors;
 
     private void Awake()
