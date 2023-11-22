@@ -14,6 +14,7 @@ public class CustomerMovement : MonoBehaviour
 
     public int currentTargetIndex;
     public bool isMoving = true;
+    private int selectedImageIndex;
 
     private static List<float> occupiedPositions = new List<float>();
 
@@ -21,6 +22,7 @@ public class CustomerMovement : MonoBehaviour
     {
         SetInitialTargetPosition();
         orderSpawner.SetQueueTime(queueTime);
+        selectedImageIndex = PlayerPrefs.GetInt("SelectedImageIndex", 0);
     }
 
     void Update()
@@ -42,6 +44,7 @@ public class CustomerMovement : MonoBehaviour
                 {
                     transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
                     isMoving = false;
+
                     orderSpawner.SpawnOrderAboveCustomer(transform.position, 0.5f);
                     AddOccupiedPosition(targetX);
                     StartCoroutine(WaitAndMoveBack(targetX));
