@@ -148,15 +148,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b003071a31f18c54a9a997e6b335fac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthManager: {fileID: 0}
   orderSpawner: {fileID: 1615031021319226661}
-  healthText: {fileID: 0}
   targetXPositions:
   - 6.75
   - 2.25
   - -2.25
   - -6.75
   movementSpeed: 5
-  queueTime: 10
+  queueTime: 1
   currentTargetIndex: 0
   isMoving: 1
 --- !u!114 &1615031021319226661
@@ -173,3 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerMovement: {fileID: 0}
   orderPrefab: {fileID: 8230313833100020665, guid: 01eadcc04d922dc44b436ae5d96d5c52, type: 3}
+  spawnedOrder: {fileID: 0}

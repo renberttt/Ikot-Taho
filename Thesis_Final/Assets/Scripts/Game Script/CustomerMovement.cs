@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class CustomerMovement : MonoBehaviour
 {
+    public HealthManager healthManager; 
     public CustomerOrder orderSpawner;
     private Cup cup;
-    public Text healthText;
 
     public float[] targetXPositions = { 6.75f, 2.25f, -2.25f, -6.75f };
     public float movementSpeed = 2f;
@@ -14,7 +14,6 @@ public class CustomerMovement : MonoBehaviour
 
     public int currentTargetIndex;
     public bool isMoving = true;
-    private int selectedImageIndex;
 
     private static List<float> occupiedPositions = new List<float>();
 
@@ -22,7 +21,11 @@ public class CustomerMovement : MonoBehaviour
     {
         SetInitialTargetPosition();
         orderSpawner.SetQueueTime(queueTime);
-        selectedImageIndex = PlayerPrefs.GetInt("SelectedImageIndex", 0);
+
+        if (healthManager == null)
+        {
+            healthManager = FindObjectOfType<HealthManager>();
+        }
     }
 
     void Update()
@@ -44,7 +47,6 @@ public class CustomerMovement : MonoBehaviour
                 {
                     transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
                     isMoving = false;
-
                     orderSpawner.SpawnOrderAboveCustomer(transform.position, 0.5f);
                     AddOccupiedPosition(targetX);
                     StartCoroutine(WaitAndMoveBack(targetX));
@@ -168,24 +170,24 @@ public class CustomerMovement : MonoBehaviour
     }
 
     private void DecrementHealthBar()
+{
+    if (healthManager != null && healthManager.healthText != null)
     {
-        if (healthText != null)
-        {
-            int currentHealth = int.Parse(healthText.text);
+        int currentHealth = int.Parse(healthManager.healthText.text);
 
-            // bawas buhay
-            currentHealth--;
+        // Decrease health
+        currentHealth--;
 
-            Debug.Log("-1 HP");
+        Debug.Log("-1 HP");
 
-
-            healthText.text = currentHealth.ToString();
-        }
-        else
-        {
-            Debug.LogWarning("No Text component found for the health bar.");
-        }
+        healthManager.healthText.text = currentHealth.ToString();
     }
+    else
+    {
+        Debug.LogWarning("No Text component found for the health bar.");
+    }
+}
+
 
     public void StopMoving()
     {
@@ -195,4 +197,6 @@ public class CustomerMovement : MonoBehaviour
     {
         occupiedPositions.Clear();
     }
+
+    
 }
