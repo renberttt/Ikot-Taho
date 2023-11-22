@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class CustomerMovement : MonoBehaviour
 {
+    public HealthManager healthManager; 
     public CustomerOrder orderSpawner;
     private Cup cup;
-    public Text healthText;
 
     public float[] targetXPositions = { 6.75f, 2.25f, -2.25f, -6.75f };
     public float movementSpeed = 2f;
@@ -21,6 +21,11 @@ public class CustomerMovement : MonoBehaviour
     {
         SetInitialTargetPosition();
         orderSpawner.SetQueueTime(queueTime);
+
+        if (healthManager == null)
+        {
+            healthManager = FindObjectOfType<HealthManager>();
+        }
     }
 
     void Update()
@@ -165,24 +170,24 @@ public class CustomerMovement : MonoBehaviour
     }
 
     private void DecrementHealthBar()
+{
+    if (healthManager != null && healthManager.healthText != null)
     {
-        if (healthText != null)
-        {
-            int currentHealth = int.Parse(healthText.text);
+        int currentHealth = int.Parse(healthManager.healthText.text);
 
-            // bawas buhay
-            currentHealth--;
+        // Decrease health
+        currentHealth--;
 
-            Debug.Log("-1 HP");
+        Debug.Log("-1 HP");
 
-
-            healthText.text = currentHealth.ToString();
-        }
-        else
-        {
-            Debug.LogWarning("No Text component found for the health bar.");
-        }
+        healthManager.healthText.text = currentHealth.ToString();
     }
+    else
+    {
+        Debug.LogWarning("No Text component found for the health bar.");
+    }
+}
+
 
     public void StopMoving()
     {
@@ -192,4 +197,6 @@ public class CustomerMovement : MonoBehaviour
     {
         occupiedPositions.Clear();
     }
+
+    
 }
