@@ -63,7 +63,7 @@ public class CustomerMovement : MonoBehaviour
                 float newPositionX = transform.position.x + direction * movementSpeed * Time.deltaTime;
                 if ((direction > 0f && newPositionX >= targetX) || (direction < 0f && newPositionX <= targetX))
                 {
-                    transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
+                    transform.position = new Vector3(targetX, transform.position.y, 0);
                     isMoving = false;
                     orderSpawner.SpawnOrderAboveCustomer(transform.position, 0.5f);
                     AddOccupiedPosition(targetX);
@@ -71,7 +71,7 @@ public class CustomerMovement : MonoBehaviour
                 }
                 else
                 {
-                    transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
+                    transform.position = new Vector3(newPositionX, transform.position.y, 0);
                 }
             }
         }
@@ -128,7 +128,7 @@ public class CustomerMovement : MonoBehaviour
     {
         Vector3 originalPosition = transform.position;
         float distanceToMove = 10f;
-        Vector3 targetPosition = originalPosition + Vector3.right * distanceToMove; // Move to the right
+        Vector3 targetPosition = originalPosition + Vector3.right * distanceToMove; 
 
         float startTime = Time.time;
         float journeyLength = Vector3.Distance(transform.position, targetPosition);
@@ -142,7 +142,7 @@ public class CustomerMovement : MonoBehaviour
             if (fractionOfJourney >= 1f)
             {
                 Vector3 currentPosition = transform.position;
-                transform.position = new Vector3(currentPosition.x, currentPosition.y, -1f); // Update the Z position to -1 (or any suitable value)
+                transform.position = new Vector3(currentPosition.x, currentPosition.y, -1f);
                 Destroy(gameObject);
                 break;
             }
@@ -158,7 +158,7 @@ public class CustomerMovement : MonoBehaviour
         Vector3 originalPosition = transform.position;
         float distanceToMove = 10f;
 
-        Vector3 targetPosition = originalPosition + Vector3.right * distanceToMove; // Move to the right
+        Vector3 targetPosition = originalPosition + Vector3.right * distanceToMove;
 
         float startTime = Time.time;
         float journeyLength = Vector3.Distance(transform.position, targetPosition);
@@ -172,7 +172,7 @@ public class CustomerMovement : MonoBehaviour
             if (fractionOfJourney >= 1f)
             {
                 Vector3 currentPosition = transform.position;
-                transform.position = new Vector3(currentPosition.x, currentPosition.y, -1f); // Update the Z position to -1 (or any suitable value)
+                transform.position = new Vector3(currentPosition.x, currentPosition.y, -1f);
                 Destroy(gameObject);
                 occupiedPositions.Remove(targetX);
                 playerHealth.DecrementHealth();

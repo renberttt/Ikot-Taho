@@ -68,6 +68,9 @@ TagManager:
   - name: Cup
     uniqueID: 128504241
     locked: 0
+  - name: PowerUps
+    uniqueID: 2304505523
+    locked: 0
   - name: Overlay
     uniqueID: 2504729863
     locked: 0
