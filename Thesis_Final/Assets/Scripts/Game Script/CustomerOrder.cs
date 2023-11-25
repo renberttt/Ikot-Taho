@@ -1,25 +1,42 @@
 using UnityEngine;
+using System.Collections;
+[System.Serializable]
+public class CustomerOrderInfo
+{
+    public Sprite sprite;
+    public string ingredients;
+
+    public CustomerOrderInfo(Sprite sprite, string orderIngredients)
+    {
+        this.sprite = sprite;
+        this.ingredients = orderIngredients;
+    }
+}
+
 
 public class CustomerOrder : MonoBehaviour
 {
-    public CustomerMovement customerMovement;
-    public CustomerSpawner customerSpawner;
+    private OrderChecker orderChecker;
     public GameObject orderPrefab;
 
-    public Sprite[] cscsCustomer;
-    public Sprite[] clacCustomer;
-    public Sprite[] cthmCustomer;
-    public Sprite[] ccjeCustomer;
-    public Sprite[] coedCustomer;
-    public Sprite[] ceatCustomer;
-    public Sprite[] cbaaCustomer;
-    
-    private Sprite[] selectedCustomerSet;
+    public CustomerOrderInfo[] cscsCustomer;
+    public CustomerOrderInfo[] clacCustomer;
+    public CustomerOrderInfo[] cthmCustomer;
+    public CustomerOrderInfo[] ccjeCustomer;
+    public CustomerOrderInfo[] coedCustomer;
+    public CustomerOrderInfo[] ceatCustomer;
+    public CustomerOrderInfo[] cbaaCustomer;
+
+    private CustomerOrderInfo[] selectedCustomerSet;
     private GameObject spawnedOrder;
     private float queueTime;
     private void Start()
     {
         SetSelectedCustomerSet();
+        if (orderChecker == null)
+        {
+            orderChecker = FindObjectOfType<OrderChecker>();
+        }
     }
     public void SetQueueTime(float time)
     {
@@ -39,7 +56,7 @@ public class CustomerOrder : MonoBehaviour
             Destroy(spawnedOrder);
         }
     }
-    private System.Collections.IEnumerator SpawnOrderWithDelay(Vector3 customerPosition, float spawnDelay)
+    private IEnumerator SpawnOrderWithDelay(Vector3 customerPosition, float spawnDelay)
     {
         yield return new WaitForSeconds(spawnDelay);
 
@@ -50,11 +67,13 @@ public class CustomerOrder : MonoBehaviour
         if (spriteRenderer != null && selectedCustomerSet.Length > 0)
         {
             int randomIndex = Random.Range(0, selectedCustomerSet.Length);
-            spriteRenderer.sprite = selectedCustomerSet[randomIndex];
+            spriteRenderer.sprite = selectedCustomerSet[randomIndex].sprite;
+            string customerOrder = selectedCustomerSet[randomIndex].ingredients;
+            orderChecker.ReceiveCustomerOrder(customerOrder);
         }
     }
 
-    private System.Collections.IEnumerator RemoveOrderAfterTime(float delay)
+    private IEnumerator RemoveOrderAfterTime(float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -63,6 +82,7 @@ public class CustomerOrder : MonoBehaviour
             Destroy(spawnedOrder);
         }
     }
+
     private void SetSelectedCustomerSet()
     {
         int selectedImageIndex = PlayerPrefs.GetInt("SelectedStage", 0);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CustomerSpawner : MonoBehaviour
 {
     public GameObject customerPrefab;
+    private CustomerOrder customerOrder;
 
     public Sprite[] cscsCustomer;
     public Sprite[] clacCustomer;
@@ -14,17 +15,29 @@ public class CustomerSpawner : MonoBehaviour
     public Sprite[] ceatCustomer;
     public Sprite[] cbaaCustomer;
 
-    public float spawnInterval = 10f;
+    private Sprite[] selectedCustomerSet;
     public Transform customerContainer;
 
-    private float spawnTimer = 0f; // Timer to track the spawn interval
-    private Sprite[] selectedCustomerSet;
+    private float spawnInterval = 5f;
+    private float spawnTimer;
     private static bool isSpawningPaused;
-    private CustomerOrder customerOrder;
-
     private void Start()
     {
         SetSelectedCustomerSet();
+        Debug.Log("INTERVAL"+spawnInterval + "/n SPAWNTIMER" + spawnTimer);
+        string difficulty = PlayerPrefs.GetString("Difficulty");
+        switch (difficulty)
+        {
+            case "Easy":
+                spawnInterval = 5f;
+                break;
+            case "Medium":
+                spawnInterval = 5f;
+                break;
+            case "Hard":
+                spawnInterval = 2f;
+                break;
+        }
     }
     private void Update()
     {
@@ -38,6 +51,10 @@ public class CustomerSpawner : MonoBehaviour
             SpawnCustomer();
             spawnTimer = 0f;
         }
+    }
+    public void SetSpawnInterval(float interval)
+    {
+        spawnInterval = interval;
     }
     private void SpawnCustomer()
     {

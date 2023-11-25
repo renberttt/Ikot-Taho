@@ -12,13 +12,13 @@ public class LayerSprites
 public class Cup : MonoBehaviour
 {
     public CustomerOrder customerOrder;
-    public ScoreText scoreText;
 
     private Vector3 initialPosition;
     private Vector3 offset;
 
     private bool isDragging = false;
     private int selectedStage;
+    private string allIngredients;
 
     public SpriteRenderer cupRenderer;
     private Sprite[][] firstLayerSprites;
@@ -39,7 +39,6 @@ public class Cup : MonoBehaviour
 
     private Dictionary<string, int> ingredientCombinations = new Dictionary<string, int>()
     {
-
         //Second Layer Combinations
         {"Pearls&Pearls", 0},
         {"Soya&Soya", 1},
@@ -60,15 +59,11 @@ public class Cup : MonoBehaviour
         {"Syrup&Syrup&Pearls", 8},
         {"Soya&Soya&Pearls", 9},
     };
+
+    //private string ingredientsInCup = thirdLayerIngredients.ToString();
     private void Start()
     {
         initialPosition = transform.position;
-
-        if (scoreText == null)
-        {
-            scoreText = FindObjectOfType<ScoreText>();
-        }
-
         selectedStage = PlayerPrefs.GetInt("SelectedStage", 0);
         InitializeSprites();
     }
@@ -110,13 +105,12 @@ public class Cup : MonoBehaviour
 
     private void LogIngredients()
     {
-        string firstLayerIngredientsStr = "First Layer Ingredients: " + string.Join(", ", firstLayerIngredients.ToArray());
-        string secondLayerIngredientsStr = "Second Layer Ingredients: " + string.Join(", ", secondLayerIngredients.ToArray());
-        string thirdLayerIngredientsStr = "Third Layer Ingredients: " + string.Join(", ", thirdLayerIngredients.ToArray());
+        List<string> combinedIngredients = new List<string>();
+        combinedIngredients.AddRange(firstLayerIngredients);
+        combinedIngredients.AddRange(secondLayerIngredients);
+        combinedIngredients.AddRange(thirdLayerIngredients);
 
-        Debug.Log(firstLayerIngredientsStr);
-        Debug.Log(secondLayerIngredientsStr);
-        Debug.Log(thirdLayerIngredientsStr);
+        allIngredients = string.Join("&", combinedIngredients);
     }
 
     public void AddIngredient(string ingredientName)
@@ -125,7 +119,6 @@ public class Cup : MonoBehaviour
         {
             firstLayerIngredients.Add(ingredientName);
             UpdateFirstLayerSprite(ingredientName);
-            LogIngredients();
         }
         else if (secondLayerIngredients.Count < 1)
         {
@@ -133,7 +126,6 @@ public class Cup : MonoBehaviour
             {
                 secondLayerIngredients.Add(ingredientName);
                 UpdateSecondLayerSprite(firstLayerIngredients[0], ingredientName);
-                LogIngredients();
             }
         }
         else if (thirdLayerIngredients.Count < 1)
@@ -168,7 +160,6 @@ public class Cup : MonoBehaviour
     private void UpdateThirdLayerSprite(string ingredientName1, string ingredientName2, string ingredientName3)
     {
         Sprite selectedSprite = GetSpriteForThirdLayer(selectedStage, ingredientName1, ingredientName2, ingredientName3);
-
         if (selectedSprite != null)
         {
             cupRenderer.sprite = selectedSprite;
@@ -228,16 +219,12 @@ public class Cup : MonoBehaviour
             {
                 if (spriteIndex >= 0 && spriteIndex < combinations.Length)
                 {
-                    Debug.Log(combination);
-                    Debug.Log(thirdLayerSprites.Length.ToString());
                     return thirdLayerSprites[level][spriteIndex];
                 }
             }
         }
-
         return null;
-    }
-
+    } 
     private void OnMouseDown()
     {
         if (!isDragging)
@@ -270,17 +257,20 @@ public class Cup : MonoBehaviour
                 if (collider.CompareTag("Customer"))
                 {
                     CustomerMovement customer = collider.GetComponent<CustomerMovement>();
-                    if (customer != null && customer.isMoving == false)
+                    if (customer != null && customer.isMoving == false && thirdLayerIngredients.Count == 1)
                     {
                         Destroy(gameObject);
                         CustomerOrder customerOrder = customer.GetComponent<CustomerOrder>();
                         if (customerOrder != null)
                         {
                             customerOrder.GiveToCustomer();
-                            
-                            // Pass the targetX position to ReceiveOrder
                             customer.ReceiveOrder(customer.targetXPositions[customer.currentTargetIndex]);
-                             scoreText.IncrementScore(50);
+                            OrderChecker orderChecker = customer.GetComponent<OrderChecker>();
+                            if(orderChecker != null)
+                            {
+                                orderChecker.ReceiveCupIngredients(allIngredients);
+                                orderChecker.CheckOrder();
+                            }
                         }
                         return;
                     }

@@ -1,17 +1,16 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class CustomerMovement : MonoBehaviour
 {
-    public HealthManager healthManager; 
+    private PlayerHealth playerHealth;
+    private CustomerSpawner customerSpawner;
     public CustomerOrder orderSpawner;
-    private Cup cup;
 
     public float[] targetXPositions = { 6.75f, 2.25f, -2.25f, -6.75f };
-    public float movementSpeed = 2f;
-    public float queueTime = 10f;
-
+    private float movementSpeed = 5f;
+    private float queueTime;
     public int currentTargetIndex;
     public bool isMoving = true;
 
@@ -20,12 +19,31 @@ public class CustomerMovement : MonoBehaviour
     private void Start()
     {
         SetInitialTargetPosition();
+
+        if (playerHealth == null)
+        {
+            playerHealth = FindObjectOfType<PlayerHealth>();
+        }
+        if (customerSpawner == null)
+        {
+            customerSpawner = FindObjectOfType<CustomerSpawner>();
+        }
+
+        string difficulty = PlayerPrefs.GetString("Difficulty");
+        switch (difficulty)
+        {
+            case "Easy":
+                queueTime = 15f;
+                break;
+            case "Medium":
+                queueTime = 10f;
+                break;
+            case "Hard":
+                queueTime = 8f;
+                break;
+        }
         orderSpawner.SetQueueTime(queueTime);
 
-        if (healthManager == null)
-        {
-            healthManager = FindObjectOfType<HealthManager>();
-        }
     }
 
     void Update()
@@ -106,7 +124,7 @@ public class CustomerMovement : MonoBehaviour
         StartCoroutine(MoveToRightAndDestroy());
     }
 
-    private System.Collections.IEnumerator MoveToRightAndDestroy()
+    private IEnumerator MoveToRightAndDestroy()
     {
         Vector3 originalPosition = transform.position;
         float distanceToMove = 10f;
@@ -133,7 +151,7 @@ public class CustomerMovement : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator WaitAndMoveBack(float targetX)
+    private IEnumerator WaitAndMoveBack(float targetX)
     {
         yield return new WaitForSeconds(queueTime);
 
@@ -157,33 +175,13 @@ public class CustomerMovement : MonoBehaviour
                 transform.position = new Vector3(currentPosition.x, currentPosition.y, -1f); // Update the Z position to -1 (or any suitable value)
                 Destroy(gameObject);
                 occupiedPositions.Remove(targetX);
-                DecrementHealthBar();
+                playerHealth.DecrementHealth();
                 break;
             }
 
             yield return null;
         }
     }
-
-    private void DecrementHealthBar()
-    {
-        if (healthManager != null && healthManager.healthText != null)
-        {
-            int currentHealth = int.Parse(healthManager.healthText.text);
-            currentHealth--;
-            healthManager.healthText.text = currentHealth.ToString();
-        }
-        else
-        {
-            Debug.LogWarning("No Text component found for the health bar.");
-        }
-    }
-
-    public void StopMoving()
-    {
-        isMoving = false;
-    }
-
     public static void ResetOccupiedPositions()
     {
         occupiedPositions.Clear();

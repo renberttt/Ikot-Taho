@@ -3,20 +3,26 @@ using UnityEngine.UI;
 
 public class TimerUI : MonoBehaviour
 {
-    public float duration = 300f; 
-    private float remainingTime; 
+    private FadeTransition fadeTransition;
     private Text timerText;
 
+    private float duration = 2 * 60f; 
+    private float remainingTime; 
     private bool isTimerRunning = true;
 
     public GameObject loseGameObject;
-    public GameObject winObjectPrefab;
+    public GameObject winGameObject;
 
     private void Start()
     {
         timerText = GetComponent<Text>();
         remainingTime = duration;
         UpdateTimerText();
+
+        if(fadeTransition == null)
+        {
+            fadeTransition = FindObjectOfType<FadeTransition>();
+        }
     }
 
     private void Update()
@@ -32,7 +38,6 @@ public class TimerUI : MonoBehaviour
         else
         {
             isTimerRunning = false;
-            Debug.Log("Time's up!");
             CheckWinCondition();
         }
     }
@@ -69,15 +74,13 @@ public class TimerUI : MonoBehaviour
 
         if (scoreText != null && scoreText.score >= 500)
         {
-            Instantiate(winObjectPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
-            Debug.Log("You Win!");
-            PauseGame();
+            winGameObject.SetActive(true);
+            fadeTransition.TogglePause();
         }
         else
         {
             SpawnLoseGameObject();
-            Debug.Log("You Lose!");
-            PauseGame();
+            fadeTransition.TogglePause();
         }
     }
 
@@ -85,13 +88,7 @@ public class TimerUI : MonoBehaviour
     {
         if (loseGameObject != null)
         {
-            Instantiate(loseGameObject, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            loseGameObject.SetActive(true);
         }
-    }
-
-    private void PauseGame()
-    {
-        // Pause the game by setting the time scale to 0
-        Time.timeScale = 0f;
     }
 }

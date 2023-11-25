@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class FadeTransition : MonoBehaviour
@@ -7,9 +8,12 @@ public class FadeTransition : MonoBehaviour
     public Animator transition;
     public float transitionTime = 1f;
     public static bool IsPaused { get; private set; }
+    private int currentStage;
 
     public void LoadNextLevel(int sceneIndex)
     {
+        if (!gameObject.activeInHierarchy) return; // Check if the script's GameObject is active
+
         if (IsPaused)
         {
             Resume();
@@ -17,8 +21,19 @@ public class FadeTransition : MonoBehaviour
 
         StartCoroutine(LoadLevel(sceneIndex));
         CustomerMovement.ResetOccupiedPositions();
-
     }
+    public void ContinueLevel()
+    {
+        int currentStage = PlayerPrefs.GetInt("SelectedStage");
+        currentStage++;
+        if(currentStage >= 7)
+        {
+            currentStage = 0;
+        }
+        PlayerPrefs.SetInt("SelectedStage", currentStage);
+        Restart();
+    }
+
     IEnumerator LoadLevel(int sceneIndex){
         transition.SetTrigger("Start");
 
@@ -33,7 +48,6 @@ public class FadeTransition : MonoBehaviour
     }
     public void Resume()
     {
-        Destroy(GameObject.FindWithTag("Pauses"));
         Time.timeScale = 1f;
         IsPaused = false;
     }

@@ -89,15 +89,15 @@ public class ScoopSpawner : MonoBehaviour
         if (spriteRenderer != null)
         {
             string scoopName = currentScoop.name;
-            if (scoopName == "Taho Scoop(Clone)")
+            if (scoopName == "Soya Scoop Prefab(Clone)")
             {
                 spriteRenderer.sprite = soyaSprite[selectedImageIndex];
             }
-            else if (scoopName == "Pearl Scoop(Clone)")
+            else if (scoopName == "Pearl Scoop Prefab(Clone)")
             {
                 spriteRenderer.sprite = pearlSprite[selectedImageIndex];
             }
-            else if (scoopName == "Syrup Scoop(Clone)")
+            else if (scoopName == "Syrup Scoop Prefab(Clone)")
             {
                 spriteRenderer.sprite = syrupSprite[selectedImageIndex];
             }
