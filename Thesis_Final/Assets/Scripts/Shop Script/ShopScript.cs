@@ -2,30 +2,54 @@ using UnityEngine;
 
 public class ShopScript : MonoBehaviour
 {
-    public ShopCoin shopCoin; // Reference to the ShopCoin script
-    public int coinValue = 0; // Coin value for this clickable object
-
-    void Start()
-    {
-        // You can initialize any object-specific settings here
-    }
+    public ShopCoin shopCoin;
+    public int coinValue = 0;
 
     void Update()
     {
-        // Check for mouse click
         if (Input.GetMouseButtonDown(0))
         {
-            // Cast a ray from the mouse position
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            // Check if the ray hits the GameObject with this script
             if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
             {
-                // If there is a collision with this GameObject, decrease the coin value
-                shopCoin.coinValue -= coinValue;
-                shopCoin.UpdateCoinText();
-                Debug.Log("Clicked on " + gameObject.name);
+                if (shopCoin != null)
+                {
+                    shopCoin.coinValue -= coinValue;
+                    shopCoin.UpdateCoinText();
+                    Debug.Log("Clicked on " + gameObject.name);
+
+                    // Check the name or tag of the clicked game object and update GameManager accordingly
+                    if (gameObject.CompareTag("Pandan"))
+                    {
+                        GameManager.Instance.shopClickedPandan = true;
+                    }
+                    if (gameObject.CompareTag("Chocolate"))
+                    {
+                        GameManager.Instance.shopClickedChocolate = true;
+                    }
+                     if (gameObject.CompareTag("Mango"))
+                    {
+                        GameManager.Instance.shopClickedMango = true;
+                    }
+                     if (gameObject.CompareTag("Ube"))
+                    {
+                        GameManager.Instance.shopClickedUbe = true;
+                    }
+                     if (gameObject.CompareTag("Tapioca"))
+                    {
+                        GameManager.Instance.shopClickedTapioca = true;
+                    }
+                     if (gameObject.CompareTag("Strawberry"))
+                    {
+                        GameManager.Instance.shopClickedStrawberry = true;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("ShopCoin reference is null!");
+                }
             }
         }
     }

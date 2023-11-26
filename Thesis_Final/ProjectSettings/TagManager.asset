@@ -22,6 +22,12 @@ TagManager:
   - StackedCups
   - Ingredients
   - FullSoya
+  - Pandan
+  - Chocolate
+  - Mango
+  - Ube
+  - Tapioca
+  - Strawberry
   layers:
   - Default
   - TransparentFX
