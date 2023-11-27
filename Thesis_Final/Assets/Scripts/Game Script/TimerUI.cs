@@ -76,6 +76,7 @@ public class TimerUI : MonoBehaviour
         {
             winGameObject.SetActive(true);
             fadeTransition.TogglePause();
+            scoreText.GetPlayerMoney();
         }
         else
         {

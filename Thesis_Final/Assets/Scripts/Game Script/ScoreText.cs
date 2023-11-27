@@ -31,4 +31,9 @@ public class ScoreText : MonoBehaviour
             scoreText.text = " " + score.ToString();
         }
     }
+
+    public void GetPlayerMoney()
+    {
+        PlayerPrefs.SetInt("PlayerMoney", score);
+    }
 }

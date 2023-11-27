@@ -2,55 +2,43 @@ using UnityEngine;
 
 public class ShopScript : MonoBehaviour
 {
-    public ShopCoin shopCoin;
+    public SpriteRenderer nextRenderers;
+    public BoxCollider2D nextColliders;
+
+    private ShopCoin shopCoin;
     public int coinValue = 0;
+    public bool isBought;
+    private void Start()
+    {
+        shopCoin = FindObjectOfType<ShopCoin>();
+
+        nextRenderers.color = Color.black;
+        nextColliders.enabled = false;
+    }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            Vector2 rayPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.zero);
 
-            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
+            if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
                 if (shopCoin != null)
                 {
-                    shopCoin.coinValue -= coinValue;
+                    shopCoin.DecreaseCoins(coinValue);
                     shopCoin.UpdateCoinText();
-                    Debug.Log("Clicked on " + gameObject.name);
-
-                    // Check the name or tag of the clicked game object and update GameManager accordingly
-                    if (gameObject.CompareTag("Pandan"))
-                    {
-                        GameManager.Instance.shopClickedPandan = true;
-                    }
-                    if (gameObject.CompareTag("Chocolate"))
-                    {
-                        GameManager.Instance.shopClickedChocolate = true;
-                    }
-                     if (gameObject.CompareTag("Mango"))
-                    {
-                        GameManager.Instance.shopClickedMango = true;
-                    }
-                     if (gameObject.CompareTag("Ube"))
-                    {
-                        GameManager.Instance.shopClickedUbe = true;
-                    }
-                     if (gameObject.CompareTag("Tapioca"))
-                    {
-                        GameManager.Instance.shopClickedTapioca = true;
-                    }
-                     if (gameObject.CompareTag("Strawberry"))
-                    {
-                        GameManager.Instance.shopClickedStrawberry = true;
-                    }
-                }
-                else
-                {
-                    Debug.LogError("ShopCoin reference is null!");
+                    isBought = true;
+                    EnableNextObject();
                 }
             }
         }
+    }
+
+    void EnableNextObject()
+    {
+         nextRenderers.color = Color.white;
+         nextColliders.enabled = true;
     }
 }
