@@ -1,32 +1,27 @@
 using UnityEngine;
 using System.Collections;
-public class ShopScript : MonoBehaviour
+public class PowerUpsShop : MonoBehaviour
 {
     private ShopCoin shopCoin;
     public GameObject warningText;
-    private int coinValue = 500;
+    private int coinValue = 1000;
     public bool isBought;
 
     public GameObject[] shopItems;
-    private SpriteRenderer[] renderersToEnable;
     private BoxCollider2D[] collidersToEnable;
-
-    private int currentIndex = 0;
+    private bool[] canClick;
 
     private void Start()
     {
         shopCoin = FindObjectOfType<ShopCoin>();
-        renderersToEnable = new SpriteRenderer[shopItems.Length];
         collidersToEnable = new BoxCollider2D[shopItems.Length];
+        canClick = new bool[shopItems.Length];
 
         for (int i = 0; i < shopItems.Length; i++)
         {
-            renderersToEnable[i] = shopItems[i].GetComponent<SpriteRenderer>();
             collidersToEnable[i] = shopItems[i].GetComponent<BoxCollider2D>();
+            canClick[i] = true;
         }
-
-        DisableAllObjects();
-        EnableObjectAtIndex(currentIndex);
     }
 
     void Update()
@@ -39,22 +34,16 @@ public class ShopScript : MonoBehaviour
             if (hit.collider != null)
             {
                 GameObject clickedObject = hit.collider.gameObject;
+                int clickedIndex = GetIndexFromGameObject(clickedObject);
 
-                if (clickedObject.CompareTag("Clickable"))
+                if (clickedIndex != -1 && canClick[clickedIndex])
                 {
                     if (shopCoin != null && shopCoin.HasEnoughCoins(coinValue))
                     {
                         shopCoin.DecreaseCoins(coinValue);
                         shopCoin.UpdateCoinText();
-                        if (currentIndex < shopItems.Length)
-                        {
-                            DisableObjectAtIndex(currentIndex);
-                            currentIndex++;
-                            if (currentIndex < shopItems.Length)
-                            {
-                                EnableObjectAtIndex(currentIndex);
-                            }
-                        }
+                        canClick[clickedIndex] = false;
+                        DisableObjectAtIndex(clickedIndex);
                     }
                     else
                     {
@@ -66,19 +55,6 @@ public class ShopScript : MonoBehaviour
         }
     }
 
-    void DisableAllObjects()
-    {
-        foreach (SpriteRenderer renderer in renderersToEnable)
-        {
-            renderer.color = Color.black;
-        }
-
-        foreach (BoxCollider2D collider in collidersToEnable)
-        {
-            collider.enabled = false;
-        }
-    }
-
     void DisableObjectAtIndex(int index)
     {
         if (index >= 0 && index < shopItems.Length)
@@ -87,13 +63,16 @@ public class ShopScript : MonoBehaviour
         }
     }
 
-    void EnableObjectAtIndex(int index)
+    int GetIndexFromGameObject(GameObject obj)
     {
-        if (index >= 0 && index < shopItems.Length)
+        for (int i = 0; i < shopItems.Length; i++)
         {
-            renderersToEnable[index].color = Color.white;
-            collidersToEnable[index].enabled = true;
+            if (obj == shopItems[i])
+            {
+                return i;
+            }
         }
+        return -1;
     }
 
     private IEnumerator Show()

@@ -8,7 +8,7 @@ public class ShopCoin : MonoBehaviour
 
     void Start()
     { 
-        coinValue = PlayerPrefs.GetInt("PlayerMoney", 5000);
+        coinValue = PlayerPrefs.GetInt("PlayerMoney", 2500);
         textComponent = GetComponent<TextMeshProUGUI>();
 
         if (textComponent != null)
@@ -23,6 +23,9 @@ public class ShopCoin : MonoBehaviour
     public void DecreaseCoins(int value)
     {
         coinValue -= value;
-        Debug.Log(coinValue);
+    }
+    public bool HasEnoughCoins(int value)
+    {
+        return coinValue >= value;
     }
 }

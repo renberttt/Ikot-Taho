@@ -5,7 +5,6 @@ using UnityEngine;
 public class CustomerSpawner : MonoBehaviour
 {
     public GameObject customerPrefab;
-    private CustomerOrder customerOrder;
 
     public Sprite[] cscsCustomer;
     public Sprite[] clacCustomer;
@@ -24,7 +23,6 @@ public class CustomerSpawner : MonoBehaviour
     private void Start()
     {
         SetSelectedCustomerSet();
-        Debug.Log("INTERVAL"+spawnInterval + "/n SPAWNTIMER" + spawnTimer);
         string difficulty = PlayerPrefs.GetString("Difficulty");
         switch (difficulty)
         {
