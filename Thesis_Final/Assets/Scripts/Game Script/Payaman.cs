@@ -46,6 +46,8 @@ public class Payaman : MonoBehaviour
         }
         sliderGameObject.SetActive(false);
         isPayamanOn = false;
+        gameObject.SetActive(false);
+
     }
     private IEnumerator PopUpDuration()
     {

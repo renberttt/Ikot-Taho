@@ -56,6 +56,7 @@ public class Taympers : MonoBehaviour
         sliderGameObject.SetActive(false);
         timerUI.StopTimer(true);
         isTaympers = false;
+        gameObject.SetActive(false);
     }
     private IEnumerator PopUpDuration()
     {

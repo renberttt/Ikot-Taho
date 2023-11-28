@@ -56,8 +56,6 @@ public class CustomerMovement : MonoBehaviour
         {
            queueTime  = +5;
         }
-        Debug.Log(mainGameController.playerLost);
-        Debug.Log(queueTime);
         orderSpawner.SetQueueTime(queueTime);
 
     }

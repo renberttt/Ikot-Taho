@@ -47,6 +47,8 @@ public class GoodsLang : MonoBehaviour
         }
         sliderGameObject.SetActive(false);
         isGoodsOn = false;
+        gameObject.SetActive(false);
+
     }
     private IEnumerator PopUpDuration()
     {

@@ -111,8 +111,6 @@ public class Cup : MonoBehaviour
         combinedIngredients.AddRange(thirdLayerIngredients);
 
         allIngredients = string.Join("&", combinedIngredients);
-
-        Debug.Log(allIngredients);
     }
 
     public void AddIngredient(string ingredientName)
