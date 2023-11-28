@@ -23,6 +23,10 @@ public class ScoreText : MonoBehaviour
         score += points;
         UpdateScoreText();
     }
+    public void SetPlayerMoney()
+    {
+        PlayerPrefs.SetInt("PlayerMoney", score);
+    }
 
     private void UpdateScoreText()
     {

@@ -4,12 +4,14 @@ using UnityEngine.UI;
 public class TimerUI : MonoBehaviour
 {
     private FadeTransition fadeTransition;
+    private MainGameController mainGameController;
+    private ScoreText scoreText;
     private Text timerText;
 
     private float duration = 2 * 60f; 
     private float remainingTime; 
     private bool isTimerRunning = true;
-
+    private bool playerLost;
     public GameObject loseGameObject;
     public GameObject winGameObject;
 
@@ -22,6 +24,10 @@ public class TimerUI : MonoBehaviour
         if(fadeTransition == null)
         {
             fadeTransition = FindObjectOfType<FadeTransition>();
+        }
+        if(mainGameController == null)
+        {
+            mainGameController = FindObjectOfType<MainGameController>();
         }
     }
 
@@ -54,7 +60,7 @@ public class TimerUI : MonoBehaviour
             seconds = 0;
         }
 
-        string timeText = string.Format("{0:00}:{1:00}", minutes, seconds);
+        string timeText = string.Format("{0:0}:{1:00}", minutes, seconds);
         timerText.text = timeText;
     }
 
@@ -63,9 +69,9 @@ public class TimerUI : MonoBehaviour
         return remainingTime;
     }
 
-    public void StopTimer()
+    public void StopTimer(bool check)
     {
-        isTimerRunning = false;
+        isTimerRunning = check;
     }
 
     private void CheckWinCondition()
@@ -76,12 +82,14 @@ public class TimerUI : MonoBehaviour
         {
             winGameObject.SetActive(true);
             fadeTransition.TogglePause();
-            scoreText.GetPlayerMoney();
+            scoreText.SetPlayerMoney();
+            mainGameController.GetPlayerStatus(1);
         }
         else
         {
             SpawnLoseGameObject();
             fadeTransition.TogglePause();
+            mainGameController.GetPlayerStatus(0);
         }
     }
 

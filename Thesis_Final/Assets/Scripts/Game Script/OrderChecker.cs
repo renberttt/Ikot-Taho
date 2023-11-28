@@ -6,9 +6,10 @@ public class OrderChecker : MonoBehaviour
     public Cup cup;
     private ScoreText scoreText;
     private PlayerHealth playerHealth;
+    private GoodsLang goodsLang;
+    private Payaman payaman;
     private string[] cupIngredients;
     private string[] customerOrder;
-
     private void Start()
     {
         if (cup == null)
@@ -23,6 +24,15 @@ public class OrderChecker : MonoBehaviour
         {
             playerHealth = FindObjectOfType<PlayerHealth>();
         }
+        if (goodsLang == null)
+        {
+            goodsLang = FindObjectOfType<GoodsLang>();
+        }
+        if (payaman == null)
+        {
+            payaman = FindObjectOfType<Payaman>();
+        }
+
     }
 
     public void CheckOrder()
@@ -33,18 +43,39 @@ public class OrderChecker : MonoBehaviour
             Array.Sort(cupIngredients);
             Array.Sort(customerOrder);
 
-            if (ArraysEqual(customerOrder, cupIngredients))
+            if (ArraysEqual(customerOrder, cupIngredients) || goodsLang.isGoodsOn == true)
             {
                 switch (difficulty)
                 {
                     case "Easy":
-                        scoreText.IncrementScore(50);
+                        if (payaman.isPayamanOn == true)
+                        {
+                            scoreText.IncrementScore(100);
+                        }
+                        else
+                        {
+                            scoreText.IncrementScore(50);
+                        }
                         break;
                     case "Medium":
-                        scoreText.IncrementScore(45);
+                        if (payaman.isPayamanOn == true)
+                        {
+                            scoreText.IncrementScore(90);
+                        }
+                        else
+                        {
+                            scoreText.IncrementScore(45);
+                        }
                         break;
                     case "Hard":
-                        scoreText.IncrementScore(40);
+                        if (payaman.isPayamanOn == true)
+                        {
+                            scoreText.IncrementScore(80);
+                        }
+                        else
+                        {
+                            scoreText.IncrementScore(40);
+                        }
                         break;
                 }
             }

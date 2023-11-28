@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class CustomerMovement : MonoBehaviour
 {
     private PlayerHealth playerHealth;
+    private MainGameController mainGameController;
     private CustomerSpawner customerSpawner;
     public CustomerOrder orderSpawner;
 
@@ -28,11 +29,20 @@ public class CustomerMovement : MonoBehaviour
         {
             customerSpawner = FindObjectOfType<CustomerSpawner>();
         }
+        if (mainGameController == null)
+        {
+            mainGameController = FindObjectOfType<MainGameController>();
+        }
 
+        int playerLost = PlayerPrefs.GetInt("PlayerLost");
         string difficulty = PlayerPrefs.GetString("Difficulty");
         switch (difficulty)
         {
             case "Easy":
+                if (playerLost == 1)
+                {
+                    queueTime = +5;
+                }
                 queueTime = 15f;
                 break;
             case "Medium":
@@ -42,6 +52,12 @@ public class CustomerMovement : MonoBehaviour
                 queueTime = 8f;
                 break;
         }
+        if(playerLost == 1)
+        {
+           queueTime  = +5;
+        }
+        Debug.Log(mainGameController.playerLost);
+        Debug.Log(queueTime);
         orderSpawner.SetQueueTime(queueTime);
 
     }

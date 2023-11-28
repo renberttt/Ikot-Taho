@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerOrder: {fileID: 0}
-  scoreText: {fileID: 0}
   cupRenderer: {fileID: 255654701891270372}
   CSCS:
     layer1:
