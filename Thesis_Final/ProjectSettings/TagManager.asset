@@ -28,6 +28,8 @@ TagManager:
   - Ube
   - Tapioca
   - Strawberry
+  - Clickable
+  - PowerUps
   layers:
   - Default
   - TransparentFX
