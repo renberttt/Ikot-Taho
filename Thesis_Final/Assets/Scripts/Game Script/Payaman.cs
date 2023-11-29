@@ -6,7 +6,7 @@ public class Payaman : MonoBehaviour
 {
     private Taympers taympers;
     private GoodsLang goodsLang;
-    public bool isPayamanOn = false;
+    public bool isPowerUpOn = false;
     public Slider powerUpSlider;
     public GameObject powerUpText;
     public GameObject sliderGameObject;
@@ -23,7 +23,7 @@ public class Payaman : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (taympers.isTaympers == false && goodsLang.isGoodsOn == false && isPayamanOn == false)
+        if (taympers.isTaympers == false && goodsLang.isGoodsOn == false && isPowerUpOn == false)
         {
             StartCoroutine(ActivateGoods());
         }
@@ -32,7 +32,7 @@ public class Payaman : MonoBehaviour
     private IEnumerator ActivateGoods()
     {
         powerUpName.text = "Payaman Activated";
-        isPayamanOn = true;
+        isPowerUpOn = true;
         powerUpText.SetActive(true);
         sliderGameObject.SetActive(true);
         StartCoroutine(PopUpDuration());
@@ -45,7 +45,7 @@ public class Payaman : MonoBehaviour
             powerUpSlider.value = timer;
         }
         sliderGameObject.SetActive(false);
-        isPayamanOn = false;
+        isPowerUpOn = false;
         gameObject.SetActive(false);
 
     }

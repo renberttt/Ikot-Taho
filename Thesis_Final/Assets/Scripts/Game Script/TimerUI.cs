@@ -5,13 +5,11 @@ public class TimerUI : MonoBehaviour
 {
     private FadeTransition fadeTransition;
     private MainGameController mainGameController;
-    private ScoreText scoreText;
     private Text timerText;
 
-    private float duration = 2 * 60f; 
+    private float duration = 90f; 
     private float remainingTime; 
     private bool isTimerRunning = true;
-    private bool playerLost;
     public GameObject loseGameObject;
     public GameObject winGameObject;
 
@@ -53,7 +51,6 @@ public class TimerUI : MonoBehaviour
         int minutes = Mathf.FloorToInt(remainingTime / 60f);
         int seconds = Mathf.FloorToInt(remainingTime % 60f);
 
-        // Check if the timer has reached 00:00
         if (minutes <= 0 && seconds <= 0)
         {
             minutes = 0;

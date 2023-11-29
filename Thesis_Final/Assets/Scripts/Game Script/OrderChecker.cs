@@ -32,7 +32,6 @@ public class OrderChecker : MonoBehaviour
         {
             payaman = FindObjectOfType<Payaman>();
         }
-
     }
 
     public void CheckOrder()
@@ -48,7 +47,7 @@ public class OrderChecker : MonoBehaviour
                 switch (difficulty)
                 {
                     case "Easy":
-                        if (payaman.isPayamanOn == true)
+                        if (payaman.isPowerUpOn == true)
                         {
                             scoreText.IncrementScore(100);
                         }
@@ -58,7 +57,7 @@ public class OrderChecker : MonoBehaviour
                         }
                         break;
                     case "Medium":
-                        if (payaman.isPayamanOn == true)
+                        if (payaman.isPowerUpOn == true)
                         {
                             scoreText.IncrementScore(90);
                         }
@@ -68,7 +67,7 @@ public class OrderChecker : MonoBehaviour
                         }
                         break;
                     case "Hard":
-                        if (payaman.isPayamanOn == true)
+                        if (payaman.isPowerUpOn == true)
                         {
                             scoreText.IncrementScore(80);
                         }

@@ -910,6 +910,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadNextLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 7963493754284178177, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7963493754284178177, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 468703820}
+    - target: {fileID: 7963493754284178177, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadNextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7963493754284178177, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8319022495689437878, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
       propertyPath: m_Camera
       value: 
@@ -948,6 +964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7210820276242275435, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
+    - {fileID: 6422833368315298240, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1511,6 +1528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   continueBtn: {fileID: 25728309}
   menuBtn: {fileID: 594296225}
+  shopBtn: {fileID: 1861058669}
 --- !u!1 &1370247569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,6 +2347,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1861058669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2691998681931870764, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
+  m_PrefabInstance: {fileID: 594296224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1862370079
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,6 +3165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3016801342704359157}
   - component: {fileID: 336143787658034144}
+  - component: {fileID: 3016801342704359158}
   m_Layer: 5
   m_Name: PowerUps
   m_TagString: Untagged
@@ -3440,6 +3464,22 @@ RectTransform:
   m_AnchoredPosition: {x: -35, y: -20}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3016801342704359158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814308611540817535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2933c6f0430f504e96d5a1358ba0d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjects:
+  - {fileID: 2454696937464071368}
+  - {fileID: 2011300681442529490}
+  - {fileID: 6642681064683166792}
 --- !u!1 &3038529972194504643
 GameObject:
   m_ObjectHideFlags: 0
@@ -4744,7 +4784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505a64aaeb244594dbaca51a9b678722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPayamanOn: 0
+  isPowerUpOn: 0
   powerUpSlider: {fileID: 1903004908}
   powerUpText: {fileID: 1903040211}
   sliderGameObject: {fileID: 100803596}

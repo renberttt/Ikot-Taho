@@ -12,7 +12,7 @@ public class GoodsLang : MonoBehaviour
     public GameObject powerUpText;
     public GameObject sliderGameObject;
     public TMP_Text powerUpName;
-    private float powerUpDuration = 10f;
+    private float powerUpDuration = 15f;
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class GoodsLang : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (payaman.isPayamanOn == false && isGoodsOn == false && taympers.isTaympers == false)
+        if (payaman.isPowerUpOn== false && isGoodsOn == false && taympers.isTaympers == false)
         {
             StartCoroutine(ActivateGoods());
         }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+
 public class PowerUpsShop : MonoBehaviour
 {
     private ShopCoin shopCoin;
@@ -20,9 +21,22 @@ public class PowerUpsShop : MonoBehaviour
         for (int i = 0; i < shopItems.Length; i++)
         {
             collidersToEnable[i] = shopItems[i].GetComponent<BoxCollider2D>();
-            canClick[i] = true;
+
+            bool purchased = PlayerPrefs.GetInt("PowerUp_" + i, 0) == 1;
+
+            if (purchased)
+            {
+                EnableObjectAtIndex(i);
+                canClick[i] = false;
+            }
+            else
+            {
+                shopItems[i].GetComponent<SpriteRenderer>().color = Color.grey;
+                canClick[i] = true;
+            }
         }
     }
+
 
     void Update()
     {
@@ -43,7 +57,10 @@ public class PowerUpsShop : MonoBehaviour
                         shopCoin.DecreaseCoins(coinValue);
                         shopCoin.UpdateCoinText();
                         canClick[clickedIndex] = false;
-                        DisableObjectAtIndex(clickedIndex);
+                        EnableObjectAtIndex(clickedIndex);
+
+                        PlayerPrefs.SetInt("PowerUp_" + clickedIndex, 1);
+                        PlayerPrefs.Save();
                     }
                     else
                     {
@@ -54,7 +71,13 @@ public class PowerUpsShop : MonoBehaviour
             }
         }
     }
-
+    void EnableObjectAtIndex(int index)
+    {
+        if (index >= 0 && index < shopItems.Length)
+        {
+            shopItems[index].GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
     void DisableObjectAtIndex(int index)
     {
         if (index >= 0 && index < shopItems.Length)

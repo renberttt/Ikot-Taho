@@ -1,20 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    private void OnMouseDown()
-    {
-        // Replace "ChildObjectName" with the name of your child GameObject
-        Transform childTransform = transform.Find("ChildObjectName");
+    public GameObject[] gameObjects;
 
-        if (childTransform != null)
+    void Start()
+    {
+        for (int i = 0; i < gameObjects.Length; i++)
         {
-            string childName = childTransform.gameObject.name;
-            Debug.Log("Selected Child Name: " + childName);
-        }
-        else
-        {
-            Debug.Log("Child GameObject not found!");
+            bool purchased = PlayerPrefs.GetInt("PowerUp_" + i, 0) == 1;
+
+            gameObjects[i].SetActive(purchased);
         }
     }
 }

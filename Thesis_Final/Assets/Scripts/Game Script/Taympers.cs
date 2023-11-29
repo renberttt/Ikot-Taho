@@ -31,7 +31,7 @@ public class Taympers : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (payaman.isPayamanOn == false && goodsLang.isGoodsOn == false && isTaympers == false)
+        if (payaman.isPowerUpOn == false && goodsLang.isGoodsOn == false && isTaympers == false)
         {
             StartCoroutine(ActivateGoods());
         }
