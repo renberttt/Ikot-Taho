@@ -161,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -36.553772}
+  m_AnchoredPosition: {x: 0, y: -36.55371}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &187815344
@@ -2525,7 +2525,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.337
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3203,7 +3203,6 @@ GameObject:
   - component: {fileID: 6791230509287986296}
   - component: {fileID: 8007644331810138939}
   - component: {fileID: 8007644331810138940}
-  - component: {fileID: 8007644331810138941}
   m_Layer: 5
   m_Name: Payaman
   m_TagString: Untagged
@@ -3270,7 +3269,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3211844950141493668}
   - component: {fileID: 4587246317515640027}
-  - component: {fileID: 4587246317515640028}
   - component: {fileID: 4587246317515640029}
   m_Layer: 5
   m_Name: Goods Lang
@@ -3480,6 +3478,13 @@ MonoBehaviour:
   - {fileID: 2454696937464071368}
   - {fileID: 2011300681442529490}
   - {fileID: 6642681064683166792}
+  powerUpText: {fileID: 1903040211}
+  sliderGameObject: {fileID: 100803596}
+  powerUpSlider: {fileID: 1903004908}
+  powerUpName: {fileID: 492191232}
+  isPayamanOn: 0
+  isGoodsOn: 0
+  isTaympersOn: 0
 --- !u!1 &3038529972194504643
 GameObject:
   m_ObjectHideFlags: 0
@@ -4100,23 +4105,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4587246317515640028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2454696937464071368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b8dd0ba27d772448a431013c696a6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGoodsOn: 0
-  powerUpSlider: {fileID: 1903004908}
-  powerUpText: {fileID: 1903040211}
-  sliderGameObject: {fileID: 100803596}
-  powerUpName: {fileID: 492191232}
 --- !u!58 &4587246317515640029
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4363,7 +4351,6 @@ GameObject:
   - component: {fileID: 2088977250964015856}
   - component: {fileID: 6818535025095512928}
   - component: {fileID: 6818535025095512929}
-  - component: {fileID: 6818535025095512930}
   m_Layer: 5
   m_Name: Taympers
   m_TagString: Untagged
@@ -4477,23 +4464,6 @@ CircleCollider2D:
   m_Offset: {x: 0.0000019073486, y: 0.00000047683716}
   serializedVersion: 2
   m_Radius: 1.2800001
---- !u!114 &6818535025095512930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6642681064683166792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ceec078f8f0624ead5987dfd1a16da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTaympers: 0
-  powerUpSlider: {fileID: 1903004908}
-  powerUpText: {fileID: 1903040211}
-  sliderGameObject: {fileID: 100803596}
-  powerUpName: {fileID: 492191232}
 --- !u!114 &6839651299138282295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4772,23 +4742,6 @@ CircleCollider2D:
   m_Offset: {x: 0.0000019073486, y: 0}
   serializedVersion: 2
   m_Radius: 1.2800001
---- !u!114 &8007644331810138941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011300681442529490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 505a64aaeb244594dbaca51a9b678722, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPowerUpOn: 0
-  powerUpSlider: {fileID: 1903004908}
-  powerUpText: {fileID: 1903040211}
-  sliderGameObject: {fileID: 100803596}
-  powerUpName: {fileID: 492191232}
 --- !u!114 &8097781239502204562
 MonoBehaviour:
   m_ObjectHideFlags: 0
