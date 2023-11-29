@@ -49,6 +49,32 @@ public class ShopScript : MonoBehaviour
         {
             GameObject clickedObject = hit.collider.gameObject;
 
+
+            switch (clickedObject.name)
+                {
+                    case "Pandan":
+                        GameManager.Instance.shopClickedPandan = true;
+                        break;
+                    case "Chocolate":
+                        GameManager.Instance.shopClickedChocolate = true;
+                        break;
+                    case "Mango":
+                        GameManager.Instance.shopClickedMango = true;
+                        break;
+                    case "Ube":
+                        GameManager.Instance.shopClickedUbe = true;
+                        break;
+                    case "Tapioca":
+                        GameManager.Instance.shopClickedTapioca = true;
+                        break;
+                    case "Strawberry":
+                        GameManager.Instance.shopClickedStrawberry = true;
+                        break;
+                    default:
+                        break;
+                }
+
+
             if (clickedObject.CompareTag("Clickable"))
             {
                 if (shopCoin != null && shopCoin.HasEnoughCoins(coinValue))
