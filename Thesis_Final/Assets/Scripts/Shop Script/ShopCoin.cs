@@ -8,7 +8,7 @@ public class ShopCoin : MonoBehaviour
 
     void Start()
     { 
-        coinValue = PlayerPrefs.GetInt("PlayerMoney", 50000);
+        coinValue = PlayerPrefs.GetInt("PlayerMoney");
         textComponent = GetComponent<TextMeshProUGUI>();
 
         if (textComponent != null)
