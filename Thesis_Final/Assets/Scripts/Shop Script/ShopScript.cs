@@ -1,13 +1,17 @@
 using UnityEngine;
+using TMPro;
 using System.Collections;
 
 public class ShopScript : MonoBehaviour
 {
     private ShopCoin shopCoin;
     public GameObject warningText;
+    public GameObject boughtText;
+    public TMP_Text boughtTMP;
     private int coinValue = 500;
 
     public GameObject[] shopItems;
+    public Sprite[] boughtSprite;
     private SpriteRenderer[] renderersToEnable;
     private BoxCollider2D[] collidersToEnable;
     private bool[] purchasedItems;
@@ -46,7 +50,7 @@ public class ShopScript : MonoBehaviour
             if (!purchasedItems[i])
             {
                 currentIndex = i;
-                EnableObjectAtIndex(currentIndex);
+                renderersToEnable[currentIndex].color = Color.white;
                 break;
             }
         }
@@ -62,7 +66,7 @@ public class ShopScript : MonoBehaviour
             if (hit.collider != null)
             {
                 GameObject clickedObject = hit.collider.gameObject;
-
+                string objectName = clickedObject.name;
                 if (clickedObject.CompareTag("Clickable"))
                 {
                     if (!purchasedItems[currentIndex])
@@ -74,8 +78,11 @@ public class ShopScript : MonoBehaviour
 
                             purchasedItems[currentIndex] = true;
                             renderersToEnable[currentIndex].color = Color.white;
+                            renderersToEnable[currentIndex].sprite = boughtSprite[currentIndex];
                             collidersToEnable[currentIndex].enabled = false;
 
+                            boughtText.SetActive(true);
+                            StartCoroutine(BoughtItem(objectName));
                             PlayerPrefs.SetInt("ShopItem_" + currentIndex, 1);
 
                             for (int i = currentIndex + 1; i < purchasedItems.Length; i++)
@@ -83,7 +90,7 @@ public class ShopScript : MonoBehaviour
                                 if (!purchasedItems[i])
                                 {
                                     currentIndex = i;
-                                    EnableObjectAtIndex(currentIndex);
+                                    renderersToEnable[currentIndex].color = Color.white;
                                     break;
                                 }
                             }
@@ -103,10 +110,17 @@ public class ShopScript : MonoBehaviour
     {
         if (index >= 0 && index < shopItems.Length)
         {
+            renderersToEnable[index].sprite = boughtSprite[index];
             renderersToEnable[index].color = Color.white;
+
         }
     }
-
+    private IEnumerator BoughtItem(string name)
+    {
+        boughtTMP.text = name + " Bought!";
+        yield return new WaitForSeconds(3);
+        boughtText.SetActive(false);
+    }
     private IEnumerator Show()
     {
         yield return new WaitForSeconds(1);

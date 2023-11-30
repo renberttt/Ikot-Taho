@@ -51,10 +51,11 @@ public class PlayerHealth : MonoBehaviour
 
         for (int i = 0; i < heartImages.Length; i++)
         {
-            SpriteRenderer heartRenderer = heartImages[i].GetComponent<SpriteRenderer>();
-            heartRenderer.sprite = i < health ? emptyHeart : null;
+            SpriteRenderer heartRenderer = heartImages[health].GetComponent<SpriteRenderer>();
+            heartRenderer.sprite = (i < health) ? null : emptyHeart;
         }
     }
+
 
     private bool AreHeartsActive()
     {
