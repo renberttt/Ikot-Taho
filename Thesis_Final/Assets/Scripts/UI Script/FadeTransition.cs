@@ -90,7 +90,7 @@ public class FadeTransition : MonoBehaviour
 
     public void LoadTutorialScene()
     {
-        PlayerPrefs.SetInt("TutorialCompleted", 0); // Set as incomplete initially
-        SceneManager.LoadScene("Tutorial"); // Load your tutorial scene
+        PlayerPrefs.SetInt("TutorialCompleted", 0); 
+        SceneManager.LoadScene("Tutorial"); 
     }
 }

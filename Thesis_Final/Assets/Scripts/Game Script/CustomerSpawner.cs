@@ -21,7 +21,6 @@ public class CustomerSpawner : MonoBehaviour
     private float spawnInterval = 5f;
     private float spawnTimer;
     private static bool isSpawningPaused;
-    private bool playerLost;
     private void Start()
     {
         SetSelectedCustomerSet();
@@ -42,6 +41,8 @@ public class CustomerSpawner : MonoBehaviour
         {
             timerUI = FindObjectOfType<TimerUI>();
         }
+        SpawnCustomer();
+        spawnTimer = 0f;
     }
     private void Update()
     {
@@ -78,7 +79,6 @@ public class CustomerSpawner : MonoBehaviour
             customerRenderer.sprite = selectedSprite;
         }
 
-        // Set the "Customer" GameObject as the parent/container
         newCustomer.transform.SetParent(customer.transform, false);
     }
     private void SetSelectedCustomerSet()

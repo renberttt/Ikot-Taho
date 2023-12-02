@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ButtonAnimation : MonoBehaviour
 {
-    public Button buttonToAnimate;
+    public Button[] buttonToAnimate;
     public float animationDuration = 1f;
     public float animationDistance = 10f;
 
@@ -12,16 +12,19 @@ public class ButtonAnimation : MonoBehaviour
 
     void Start()
     {
-        buttonRectTransform = buttonToAnimate.GetComponent<RectTransform>();
-        startPosition = buttonRectTransform.anchoredPosition; // Use anchoredPosition instead of position
-
-        // Start the animation when the script starts
-        AnimateButton();
+        foreach (Button button in buttonToAnimate)
+        {
+            if (button != null && button.interactable)
+            {
+                buttonRectTransform = button.GetComponent<RectTransform>();
+                startPosition = buttonRectTransform.anchoredPosition;
+                AnimateButton(buttonRectTransform);
+            }
+        }
     }
 
-    void AnimateButton()
+    void AnimateButton(RectTransform buttonRectTransform)
     {
-        // Animate the button's scale to create a pulse effect
         LeanTween.scale(buttonRectTransform, Vector3.one * 1.1f, animationDuration / 2)
             .setEaseOutQuad()
             .setOnComplete(() =>
@@ -30,8 +33,7 @@ public class ButtonAnimation : MonoBehaviour
                     .setEaseInQuad()
                     .setOnComplete(() =>
                     {
-                        // Start the animation again (looping)
-                        AnimateButton();
+                        AnimateButton(buttonRectTransform);
                     });
             });
     }

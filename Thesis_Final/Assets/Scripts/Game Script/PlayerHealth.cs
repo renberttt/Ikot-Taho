@@ -3,13 +3,17 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public FadeTransition fadeTransition;
+    private StageSelect stageSelect;
     public GameObject[] heartImages;
     public GameObject loseGameObject;
+    public GameObject warningGameObject;
     public Sprite emptyHeart;
     private int health = 5;
+    private bool isPlayerLost;
 
     private void Start()
     {
+        stageSelect = FindObjectOfType<StageSelect>();
         string difficulty = PlayerPrefs.GetString("Difficulty");
         switch (difficulty)
         {
@@ -45,8 +49,22 @@ public class PlayerHealth : MonoBehaviour
     {
         if (health <= 0 && AreHeartsActive())
         {
-            loseGameObject.SetActive(true);
-            fadeTransition.TogglePause();
+            isPlayerLost = true;
+            PlayerPrefs.SetInt("PlayerLost", isPlayerLost ? 1 : 0);
+            int lossesCount = PlayerPrefs.GetInt("LossesCount", 0);
+            lossesCount++;
+            PlayerPrefs.SetInt("LossesCount", lossesCount);
+
+            if(lossesCount >= 3)
+            {
+                warningGameObject.SetActive(true);
+                fadeTransition.TogglePause();
+            }
+            else
+            {
+                loseGameObject.SetActive(true);
+                fadeTransition.TogglePause();
+            } 
         }
 
         for (int i = 0; i < heartImages.Length; i++)
@@ -55,7 +73,6 @@ public class PlayerHealth : MonoBehaviour
             heartRenderer.sprite = (i < health) ? null : emptyHeart;
         }
     }
-
 
     private bool AreHeartsActive()
     {

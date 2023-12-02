@@ -7,8 +7,8 @@ public class Switcher : MonoBehaviour
     public GameObject[] buttons;
     public GameObject[] texts;
     public GameObject continueButton;
-    public Button previousButton;
-    public Button nextButton;
+    public GameObject previousButton;
+    public GameObject nextButton;
 
     private int index = 0;
 
@@ -30,8 +30,8 @@ public class Switcher : MonoBehaviour
 
         index = newIndex;
 
-        previousButton.interactable = (index > 0);
-        nextButton.interactable = (index < backgrounds.Length - 1);
+        previousButton.SetActive(index > 0);
+        nextButton.SetActive(index < backgrounds.Length - 1);
         continueButton.SetActive(!(index < backgrounds.Length - 1));
     }
 
