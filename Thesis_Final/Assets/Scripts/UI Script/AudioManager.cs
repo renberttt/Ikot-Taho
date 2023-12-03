@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Clip")]
     public AudioClip background;
+    public AudioClip backgroundGraduation;
     public AudioClip backgroundGame;
     public AudioClip buttonSelect;
     public AudioClip winSound;
@@ -41,7 +42,10 @@ public class AudioManager : MonoBehaviour
         sceneBackgroundMusic["Stage Selection"] = background;
         sceneBackgroundMusic["Difficulty Selection"] = background;
         sceneBackgroundMusic["Shop"] = background;
+        sceneBackgroundMusic["Leaderboards"] = background;
         sceneBackgroundMusic["Game"] = backgroundGame;
+        sceneBackgroundMusic["Ending Scene"] = backgroundGraduation;
+
 
         int sceneCount = SceneManager.sceneCount;
         for (int i = 0; i < sceneCount; i++)
