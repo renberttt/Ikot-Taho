@@ -24,13 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/Ending.unity
-    guid: 15741d56ddbc2344184035e4e049b158
-  - enabled: 1
-    path: Assets/Scenes/Credits.unity
-    guid: df421e73eb32e314e8e682bf67b6472f
-=======
     path: Assets/Scenes/Ending Scene.unity
     guid: 82ad5df0526efd74ab197fe9cbf2da6c
   - enabled: 1
@@ -39,5 +32,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 7b5938d5ad8f73a4c8db00e64e08240c
->>>>>>> c3887593078780267d98cc26556d62c3e4e64460
   m_configObjects: {}
