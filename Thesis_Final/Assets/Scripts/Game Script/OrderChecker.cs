@@ -6,8 +6,7 @@ public class OrderChecker : MonoBehaviour
     public Cup cup;
     private ScoreText scoreText;
     private PlayerHealth playerHealth;
-    private GoodsLang goodsLang;
-    private Payaman payaman;
+    private PowerUps powerUps;
     private string[] cupIngredients;
     private string[] customerOrder;
     private void Start()
@@ -24,15 +23,7 @@ public class OrderChecker : MonoBehaviour
         {
             playerHealth = FindObjectOfType<PlayerHealth>();
         }
-        if (goodsLang == null)
-        {
-            goodsLang = FindObjectOfType<GoodsLang>();
-        }
-        if (payaman == null)
-        {
-            payaman = FindObjectOfType<Payaman>();
-        }
-
+        powerUps = FindObjectOfType<PowerUps>();
     }
 
     public void CheckOrder()
@@ -43,12 +34,12 @@ public class OrderChecker : MonoBehaviour
             Array.Sort(cupIngredients);
             Array.Sort(customerOrder);
 
-            if (ArraysEqual(customerOrder, cupIngredients) || goodsLang.isGoodsOn == true)
+            if (ArraysEqual(customerOrder, cupIngredients) || powerUps.isGoodsOn == true)
             {
                 switch (difficulty)
                 {
                     case "Easy":
-                        if (payaman.isPayamanOn == true)
+                        if (powerUps.isPayamanOn == true)
                         {
                             scoreText.IncrementScore(100);
                         }
@@ -58,7 +49,7 @@ public class OrderChecker : MonoBehaviour
                         }
                         break;
                     case "Medium":
-                        if (payaman.isPayamanOn == true)
+                        if (powerUps.isPayamanOn == true)
                         {
                             scoreText.IncrementScore(90);
                         }
@@ -68,7 +59,7 @@ public class OrderChecker : MonoBehaviour
                         }
                         break;
                     case "Hard":
-                        if (payaman.isPayamanOn == true)
+                        if (powerUps.isPayamanOn == true)
                         {
                             scoreText.IncrementScore(80);
                         }

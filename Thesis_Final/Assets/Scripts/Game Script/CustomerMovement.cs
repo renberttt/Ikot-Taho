@@ -7,6 +7,7 @@ public class CustomerMovement : MonoBehaviour
     private PlayerHealth playerHealth;
     private MainGameController mainGameController;
     private CustomerSpawner customerSpawner;
+    private TimerUI timerUI;
     public CustomerOrder orderSpawner;
 
     public float[] targetXPositions = { 6.75f, 2.25f, -2.25f, -6.75f };
@@ -33,31 +34,36 @@ public class CustomerMovement : MonoBehaviour
         {
             mainGameController = FindObjectOfType<MainGameController>();
         }
+        timerUI = FindObjectOfType<TimerUI>();
 
-        int playerLost = PlayerPrefs.GetInt("PlayerLost");
         string difficulty = PlayerPrefs.GetString("Difficulty");
+        bool playerLost = PlayerPrefs.GetInt("PlayerLost", 0) == 1;
+
         switch (difficulty)
         {
             case "Easy":
-                if (playerLost == 1)
-                {
-                    queueTime = +5;
-                }
                 queueTime = 15f;
+                if (playerLost)
+                {
+                    queueTime += 1f;
+                }
                 break;
             case "Medium":
                 queueTime = 10f;
+                if (playerLost)
+                {
+                    queueTime += 1f;
+                }
                 break;
             case "Hard":
                 queueTime = 8f;
+                if (playerLost)
+                {
+                    queueTime += 1f;
+                }
                 break;
         }
-        if(playerLost == 1)
-        {
-           queueTime  = +5;
-        }
         orderSpawner.SetQueueTime(queueTime);
-
     }
 
     void Update()
@@ -167,7 +173,8 @@ public class CustomerMovement : MonoBehaviour
 
     private IEnumerator WaitAndMoveBack(float targetX)
     {
-        yield return new WaitForSeconds(queueTime);
+        float currentQueueTime = queueTime;
+        yield return new WaitForSeconds(currentQueueTime);
 
         Vector3 originalPosition = transform.position;
         float distanceToMove = 10f;

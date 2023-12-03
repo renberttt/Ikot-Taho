@@ -1,34 +1,35 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TimerUI : MonoBehaviour
 {
     private FadeTransition fadeTransition;
-    private MainGameController mainGameController;
-    private ScoreText scoreText;
     private Text timerText;
+    private StageSelect stageSelect;
 
-    private float duration = 2 * 60f; 
+    private float duration = 90f; 
     private float remainingTime; 
     private bool isTimerRunning = true;
-    private bool playerLost;
+    private bool isPlayerLost;
+    private int lossesCount = 0;
+    private int currentStageIndex;
+    private string currentDifficulty;
     public GameObject loseGameObject;
     public GameObject winGameObject;
-
+    public GameObject warningGameObject;
     private void Start()
     {
         timerText = GetComponent<Text>();
         remainingTime = duration;
         UpdateTimerText();
 
-        if(fadeTransition == null)
-        {
-            fadeTransition = FindObjectOfType<FadeTransition>();
-        }
-        if(mainGameController == null)
-        {
-            mainGameController = FindObjectOfType<MainGameController>();
-        }
+        fadeTransition = FindObjectOfType<FadeTransition>();
+        stageSelect = FindObjectOfType<StageSelect>();
+        lossesCount = PlayerPrefs.GetInt("LossesCount", 0);
+        currentStageIndex = PlayerPrefs.GetInt("SelectedStage", 0);
+        currentDifficulty = PlayerPrefs.GetString("Difficulty");
+
     }
 
     private void Update()
@@ -36,6 +37,13 @@ public class TimerUI : MonoBehaviour
         if (!isTimerRunning)
             return;
 
+        ScoreText scoreText = FindObjectOfType<ScoreText>();
+        if (scoreText != null && scoreText.score >= 500)
+        {
+            isTimerRunning = false;
+            CheckWinCondition();
+            return;
+        }
         if (remainingTime > 0f)
         {
             remainingTime -= Time.deltaTime;
@@ -48,12 +56,12 @@ public class TimerUI : MonoBehaviour
         }
     }
 
+
     private void UpdateTimerText()
     {
         int minutes = Mathf.FloorToInt(remainingTime / 60f);
         int seconds = Mathf.FloorToInt(remainingTime % 60f);
 
-        // Check if the timer has reached 00:00
         if (minutes <= 0 && seconds <= 0)
         {
             minutes = 0;
@@ -80,19 +88,53 @@ public class TimerUI : MonoBehaviour
 
         if (scoreText != null && scoreText.score >= 500)
         {
+            StoreStageCompletionTime(currentStageIndex, currentDifficulty);
+            isPlayerLost = false;
+            PlayerPrefs.SetInt("PlayerLost", isPlayerLost ? 1 : 0);
             winGameObject.SetActive(true);
             fadeTransition.TogglePause();
             scoreText.SetPlayerMoney();
-            mainGameController.GetPlayerStatus(1);
         }
         else
         {
-            SpawnLoseGameObject();
-            fadeTransition.TogglePause();
-            mainGameController.GetPlayerStatus(0);
+            isPlayerLost = true;
+            PlayerPrefs.SetInt("PlayerLost", isPlayerLost ? 1 : 0);
+            lossesCount++;
+            PlayerPrefs.SetInt("LossesCount", lossesCount);
+            if (lossesCount >= 3)
+            {
+                warningGameObject.SetActive(true);
+                fadeTransition.TogglePause();
+            }
+            else
+            {
+                Debug.Log(lossesCount);
+                SpawnLoseGameObject();
+                fadeTransition.TogglePause();
+            }
         }
     }
+    private void StoreStageCompletionTime(int stageIndex, string selectedDifficulty)
+    {
+        float completionTime = duration - remainingTime;
 
+        string completionTimeKey = "StageCompletionTime_" + stageIndex;
+        string serializedTimes = PlayerPrefs.GetString(completionTimeKey, "");
+
+        if (!string.IsNullOrEmpty(serializedTimes))
+        {
+            serializedTimes += ",";
+        }
+
+        string completionInfo = completionTime.ToString() + "_" + selectedDifficulty.ToString();
+        serializedTimes += completionInfo;
+        PlayerPrefs.SetString(completionTimeKey, serializedTimes);
+    }
+
+    public void ResetLoseCount()
+    {
+        PlayerPrefs.SetInt("LossesCount", 0);
+    }
     private void SpawnLoseGameObject()
     {
         if (loseGameObject != null)

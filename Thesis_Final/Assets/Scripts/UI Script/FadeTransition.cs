@@ -10,6 +10,23 @@ public class FadeTransition : MonoBehaviour
     public static bool IsPaused { get; private set; }
     private int currentStage;
 
+    void Start()
+    {
+        CheckNewPlayer();
+    }
+
+    void CheckNewPlayer()
+    {
+        if (!PlayerPrefs.HasKey("TutorialCompleted"))
+        {
+            LoadTutorialScene();
+        }
+        else
+        {
+            currentStage = PlayerPrefs.GetInt("SelectedStage");
+        }
+    }
+
     public void LoadNextLevel(int sceneIndex)
     {
         if (!gameObject.activeInHierarchy) return; // Check if the script's GameObject is active
@@ -22,11 +39,11 @@ public class FadeTransition : MonoBehaviour
         StartCoroutine(LoadLevel(sceneIndex));
         CustomerMovement.ResetOccupiedPositions();
     }
+
     public void ContinueLevel()
     {
-        int currentStage = PlayerPrefs.GetInt("SelectedStage");
         currentStage++;
-        if(currentStage >= 7)
+        if (currentStage >= 7)
         {
             currentStage = 0;
         }
@@ -34,28 +51,33 @@ public class FadeTransition : MonoBehaviour
         Restart();
     }
 
-    IEnumerator LoadLevel(int sceneIndex){
+    IEnumerator LoadLevel(int sceneIndex)
+    {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(sceneIndex);
     }
+
     public void QuitGame()
     {
         Debug.Log("quit");
         Application.Quit();
     }
+
     public void Resume()
     {
         Time.timeScale = 1f;
         IsPaused = false;
     }
+
     public void TogglePause()
     {
         IsPaused = !IsPaused;
         Time.timeScale = IsPaused ? 0f : 1f;
     }
+
     public void Restart()
     {
         if (IsPaused)
@@ -64,5 +86,11 @@ public class FadeTransition : MonoBehaviour
         }
         CustomerMovement.ResetOccupiedPositions();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadTutorialScene()
+    {
+        PlayerPrefs.SetInt("TutorialCompleted", 0); 
+        SceneManager.LoadScene("Tutorial"); 
     }
 }

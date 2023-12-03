@@ -1,15 +1,20 @@
 using UnityEngine;
+using TMPro;
 using System.Collections;
+
 public class ShopScript : MonoBehaviour
 {
     private ShopCoin shopCoin;
     public GameObject warningText;
     public GameObject boughtText;
+    public TMP_Text boughtTMP;
     private int coinValue = 500;
 
     public GameObject[] shopItems;
+    public Sprite[] boughtSprite;
     private SpriteRenderer[] renderersToEnable;
     private BoxCollider2D[] collidersToEnable;
+    private bool[] purchasedItems;
 
     private int currentIndex = 0;
 
@@ -18,6 +23,7 @@ public class ShopScript : MonoBehaviour
         shopCoin = FindObjectOfType<ShopCoin>();
         renderersToEnable = new SpriteRenderer[shopItems.Length];
         collidersToEnable = new BoxCollider2D[shopItems.Length];
+        purchasedItems = new bool[shopItems.Length];
 
         for (int i = 0; i < shopItems.Length; i++)
         {
@@ -25,98 +31,78 @@ public class ShopScript : MonoBehaviour
             collidersToEnable[i] = shopItems[i].GetComponent<BoxCollider2D>();
 
             bool purchased = PlayerPrefs.GetInt("ShopItem_" + i, 0) == 1;
+            purchasedItems[i] = purchased;
 
-            if (purchased || i == 0)
+            if (purchased)
             {
                 EnableObjectAtIndex(i);
+                collidersToEnable[i].enabled = false;
             }
             else
             {
                 renderersToEnable[i].color = Color.black;
-                collidersToEnable[i].enabled = false;
+                collidersToEnable[i].enabled = true;
+            }
+        }
+
+        for (int i = 0; i < purchasedItems.Length; i++)
+        {
+            if (!purchasedItems[i])
+            {
+                currentIndex = i;
+                renderersToEnable[currentIndex].color = Color.white;
+                break;
             }
         }
     }
 
     void Update()
-{
-    if (Input.GetMouseButtonDown(0))
     {
-        Vector2 rayPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.zero);
-
-        if (hit.collider != null)
+        if (Input.GetMouseButtonDown(0))
         {
-            GameObject clickedObject = hit.collider.gameObject;
+            Vector2 rayPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.zero);
 
-
-            switch (clickedObject.name)
-                {
-                    case "Pandan":
-                        GameManager.Instance.shopClickedPandan = true;
-                        break;
-                    case "Chocolate":
-                        GameManager.Instance.shopClickedChocolate = true;
-                        break;
-                    case "Mango":
-                        GameManager.Instance.shopClickedMango = true;
-                        break;
-                    case "Ube":
-                        GameManager.Instance.shopClickedUbe = true;
-                        break;
-                    case "Tapioca":
-                        GameManager.Instance.shopClickedTapioca = true;
-                        break;
-                    case "Strawberry":
-                        GameManager.Instance.shopClickedStrawberry = true;
-                        break;
-                    default:
-                        break;
-                }
-
-
-            if (clickedObject.CompareTag("Clickable"))
+            if (hit.collider != null)
             {
-                if (shopCoin != null && shopCoin.HasEnoughCoins(coinValue))
+                GameObject clickedObject = hit.collider.gameObject;
+                string objectName = clickedObject.name;
+                if (clickedObject.CompareTag("Clickable"))
                 {
-                    shopCoin.DecreaseCoins(coinValue);
-                    shopCoin.UpdateCoinText();
-                    
-                    PlayerPrefs.SetInt("ShopItem_" + currentIndex, 1);
-                    PlayerPrefs.Save();
-
-                    bool purchased = PlayerPrefs.GetInt("ShopItem_" + currentIndex, 0) == 1;
-                    if (purchased && currentIndex != 0) // Exclude the first item
+                    if (!purchasedItems[currentIndex])
                     {
-                        boughtText.SetActive(true);
-                        StartCoroutine(HideBoughtText());
-                    }
-                    
-                    if (currentIndex < shopItems.Length)
-                    {
-                        DisableObjectAtIndex(currentIndex);
-                        currentIndex++;
-                        if (currentIndex < shopItems.Length)
+                        if (shopCoin != null && shopCoin.HasEnoughCoins(coinValue))
                         {
-                            EnableObjectAtIndex(currentIndex);
+                            shopCoin.DecreaseCoins(coinValue);
+                            shopCoin.UpdateCoinText();
+
+                            purchasedItems[currentIndex] = true;
+                            renderersToEnable[currentIndex].color = Color.white;
+                            renderersToEnable[currentIndex].sprite = boughtSprite[currentIndex];
+                            collidersToEnable[currentIndex].enabled = false;
+
+                            boughtText.SetActive(true);
+                            StartCoroutine(BoughtItem(objectName));
+                            PlayerPrefs.SetInt("ShopItem_" + currentIndex, 1);
+
+                            for (int i = currentIndex + 1; i < purchasedItems.Length; i++)
+                            {
+                                if (!purchasedItems[i])
+                                {
+                                    currentIndex = i;
+                                    renderersToEnable[currentIndex].color = Color.white;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            warningText.SetActive(true);
+                            StartCoroutine(Show());
                         }
                     }
                 }
-                else
-                {
-                    warningText.SetActive(true);
-                    StartCoroutine(Show());
-                }
             }
-        }
-    }
-}
-
-    void DisableObjectAtIndex(int index)
-    {
-        if (index >= 0 && index < shopItems.Length)
-        {
-            collidersToEnable[index].enabled = false;
         }
     }
 
@@ -124,13 +110,15 @@ public class ShopScript : MonoBehaviour
     {
         if (index >= 0 && index < shopItems.Length)
         {
+            renderersToEnable[index].sprite = boughtSprite[index];
             renderersToEnable[index].color = Color.white;
-            collidersToEnable[index].enabled = true;
+
         }
     }
-    private IEnumerator HideBoughtText()
+    private IEnumerator BoughtItem(string name)
     {
-        yield return new WaitForSeconds(1);
+        boughtTMP.text = name + " Bought!";
+        yield return new WaitForSeconds(3);
         boughtText.SetActive(false);
     }
     private IEnumerator Show()
