@@ -858,6 +858,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4192340096416776634, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4501499390702500778, guid: 7cc46acaf9943204f8c12ae1817e438d, type: 3}
       propertyPath: m_Icon
       value: 
@@ -2136,6 +2140,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2039954141607501558, guid: 148d609f4fb30e940b88fc5e7ed2166e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4192340096416776634, guid: 148d609f4fb30e940b88fc5e7ed2166e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4192340096416776634, guid: 148d609f4fb30e940b88fc5e7ed2166e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4192340096416776634, guid: 148d609f4fb30e940b88fc5e7ed2166e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4192340096416776634, guid: 148d609f4fb30e940b88fc5e7ed2166e, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4501499390702500778, guid: 148d609f4fb30e940b88fc5e7ed2166e, type: 3}
